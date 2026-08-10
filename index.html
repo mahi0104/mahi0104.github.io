@@ -62,17 +62,38 @@
   @media (max-width: 760px) { .nav-links { display: none; } }
 
   /* Hero */
-  .hero { padding: 96px 0 64px; }
+  .hero { padding: 96px 0 64px; position: relative; overflow: hidden; }
+  .hero-dots {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(rgba(0,0,0,0.055) 1px, transparent 1px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 75% 30%, black 0%, transparent 70%);
+            mask-image: radial-gradient(ellipse 80% 70% at 75% 30%, black 0%, transparent 70%);
+  }
   .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; }
+  .hero-photo-wrap { position: relative; }
   .hero-photo img {
     width: 300px; height: 300px; border-radius: 50%; object-fit: cover;
     border: 6px solid #fff; outline: 1px solid rgba(0,0,0,0.08);
     box-shadow: rgba(0,0,0,0.08) 0px 18px 40px -12px, rgba(0,0,0,0.04) 0px 6px 16px;
   }
+  .chip {
+    position: absolute; background: #fff; border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 10px; padding: 8px 14px; font-size: 12.5px; font-weight: 600;
+    color: var(--text-2); box-shadow: var(--card-shadow); white-space: nowrap;
+  }
+  .chip b { color: var(--blue); }
+  .chip-1 { top: 12%; right: -18px; }
+  .chip-2 { bottom: 10%; left: -24px; }
+  .hero-spark { position: absolute; right: 28px; bottom: 18px; width: 240px; opacity: 0.55; pointer-events: none; }
   @media (max-width: 760px) {
     .hero-inner { grid-template-columns: 1fr; gap: 32px; }
     .hero-photo { order: -1; display: flex; justify-content: center; }
     .hero-photo img { width: 220px; height: 220px; }
+  }
+  @media (max-width: 900px) { .chip, .hero-spark { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .chip, .hero-spark, .hero-dots { display: none; }
   }
   .hero-badge {
     display: inline-block; background: var(--badge-bg); color: var(--badge-text);
@@ -198,6 +219,7 @@
 </nav>
 
 <header class="hero" id="top">
+  <div class="hero-dots"></div>
   <div class="container">
     <div class="hero-inner">
       <div class="hero-text">
@@ -211,8 +233,17 @@
         </div>
         <div class="hero-meta" data-i18n="hero_meta">Caserta, Italy · Driving licence A+B · Open to junior roles, BI support &amp; internships</div>
       </div>
-      <div class="hero-photo">
-        <img src="hero.jpg" alt="Mahesh Pentu">
+      <div class="hero-photo-wrap">
+        <div class="hero-photo">
+          <img src="hero.jpg" alt="Mahesh Pentu">
+        </div>
+        <div class="chip chip-1" data-i18n-html="chip1_html"><b>+44%</b> coastal premium overestimated</div>
+        <div class="chip chip-2" data-i18n-html="chip2_html">487 <b>transactions</b> · 1 thesis</div>
+        <svg class="hero-spark" viewBox="0 0 240 72" fill="none" aria-hidden="true">
+          <path d="M0 58 C18 55, 28 62, 46 52 S 74 28, 92 40 S 120 18, 138 30 S 176 8, 196 18 S 228 6, 240 10"
+                stroke="#0075de" stroke-width="2.5" stroke-linecap="round" pathLength="1"/>
+          <circle cx="240" cy="10" r="3.5" fill="#0075de"/>
+        </svg>
       </div>
     </div>
   </div>
@@ -405,6 +436,8 @@ var I18N = {
   hero_btn1:    {en:"See my projects", it:"Vedi i miei progetti"},
   hero_btn2:    {en:"Get in touch", it:"Contattami"},
   hero_meta:    {en:"Caserta, Italy · Driving licence A+B · Open to junior roles, BI support & internships", it:"Caserta, Italia · Patente A+B · Disponibile a ruoli junior, supporto BI e tirocini"},
+  chip1_html:   {en:"<b>+44%</b> coastal premium overestimated", it:"<b>+44%</b> premio costiero sovrastimato"},
+  chip2_html:   {en:"487 <b>transactions</b> · 1 thesis", it:"487 <b>transazioni</b> · 1 tesi"},
   m1:           {en:"BSc Data Analysis grade", it:"Voto di laurea in Data Analysis"},
   m2:           {en:"Data supervision & QA experience", it:"Esperienza in supervisione dati e QA"},
   m3:           {en:"Languages: Telugu · Italian · English", it:"Lingue: Telugu · Italiano · Inglese"},
@@ -510,6 +543,7 @@ function applyLang(lang) {
   document.getElementById('cv-link2').href = lang === 'it' ? 'cv/CV_Mahesh_Pentu_IT.docx' : 'cv/CV_Mahesh_Pentu_EN.docx';
   document.getElementById('lang-btn').textContent = lang === 'it' ? 'EN' : 'IT';
   try { localStorage.setItem('portfolio-lang', lang); } catch (e) {}
+  try { if (window.ScrollTrigger) ScrollTrigger.refresh(); } catch (e) {}
 }
 function toggleLang() {
   applyLang(currentLang === 'it' ? 'en' : 'it');
@@ -522,6 +556,68 @@ function toggleLang() {
   applyLang(nav.indexOf('it') === 0 ? 'it' : 'en');
 })();
 window.applyLang = applyLang;
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || typeof gsap === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.defaults({ ease: 'power3.out' });
+
+  /* Hero entrance — staggered, like reading a dashboard top to bottom */
+  var tl = gsap.timeline({ defaults: { duration: 0.9 } });
+  tl.from('.hero-badge', { y: 18, autoAlpha: 0, duration: 0.6 })
+    .from('.hero h1 > span', { y: 44, autoAlpha: 0, stagger: 0.09 }, '-=0.25')
+    .from('.hero .subtitle', { y: 26, autoAlpha: 0 }, '-=0.5')
+    .from('.hero .lead', { y: 26, autoAlpha: 0 }, '-=0.55')
+    .from('.hero-actions .btn', { y: 20, autoAlpha: 0, stagger: 0.1 }, '-=0.55')
+    .from('.hero-meta', { y: 14, autoAlpha: 0 }, '-=0.45')
+    .from('.hero-photo img', { scale: 0.86, autoAlpha: 0, duration: 1.1 }, '-=0.85')
+    .from('.chip', { y: 22, autoAlpha: 0, stagger: 0.16, duration: 0.6 }, '-=0.55');
+
+  /* Sparkline draws itself */
+  var spark = document.querySelector('.hero-spark path');
+  if (spark) {
+    gsap.fromTo(spark, { strokeDashoffset: 1 }, {
+      strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut', delay: 0.7
+    });
+  }
+
+  /* Floating stat chips — gentle yoyo */
+  gsap.to('.chip-1', { y: -10, duration: 2.6, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  gsap.to('.chip-2', { y: 8, duration: 3.2, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.4 });
+
+  /* Metrics count up when scrolled into view */
+  gsap.utils.toArray('.metric .num').forEach(function (el) {
+    var target = parseInt((el.textContent.match(/\d+/) || ['0'])[0], 10);
+    var suffix = el.textContent.replace(/^\d+/, '');
+    var obj = { v: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 92%',
+      once: true,
+      onEnter: function () {
+        gsap.to(obj, {
+          v: target, duration: 1.5, ease: 'power2.out',
+          onUpdate: function () { el.textContent = Math.round(obj.v) + suffix; }
+        });
+      }
+    });
+  });
+
+  /* Section reveals — every block fades up as it enters the viewport */
+  gsap.utils.toArray('section').forEach(function (sec) {
+    var targets = sec.querySelectorAll('.section-label, .section-title, .section-intro, .card, .pill, .tag, .contact-row');
+    if (!targets.length) return;
+    gsap.from(targets, {
+      y: 36, autoAlpha: 0, duration: 0.8, stagger: 0.05,
+      scrollTrigger: { trigger: sec, start: 'top 78%', once: true }
+    });
+  });
+})();
 </script>
 
 </body>
