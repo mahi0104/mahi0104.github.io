@@ -39,20 +39,27 @@
     position: sticky; top: 0; background: rgba(255,255,255,0.92);
     backdrop-filter: blur(8px); border-bottom: var(--border); z-index: 50;
   }
-  nav .container { display: flex; align-items: center; justify-content: space-between; height: 60px; }
-  .brand { font-weight: 700; font-size: 15px; letter-spacing: -0.2px; text-decoration: none; color: var(--text); }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
+  nav .container { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { font-weight: 700; font-size: 15px; letter-spacing: -0.2px; text-decoration: none; color: var(--text); white-space: nowrap; }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
   .nav-links a {
     font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none;
     transition: color 0.15s;
   }
   .nav-links a:hover { color: var(--blue); }
+  .lang-btn {
+    background: transparent; border: 1px solid rgba(0,0,0,0.2); border-radius: 4px;
+    font-size: 13px; font-weight: 600; color: var(--text); padding: 5px 10px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .lang-btn:hover { border-color: var(--blue); color: var(--blue); }
   .nav-cta {
     background: var(--blue); color: #fff; font-size: 14px; font-weight: 600;
-    padding: 8px 16px; border-radius: 4px; text-decoration: none; transition: background 0.15s;
+    padding: 8px 16px; border-radius: 4px; text-decoration: none; transition: background 0.15s; white-space: nowrap;
   }
   .nav-cta:hover { background: var(--blue-active); }
-  @media (max-width: 720px) { .nav-links { display: none; } }
+  @media (max-width: 760px) { .nav-links { display: none; } }
 
   /* Hero */
   .hero { padding: 96px 0 64px; }
@@ -132,9 +139,7 @@
     border: 1px solid rgba(0,0,0,0.15); padding: 2px 8px; border-radius: 9999px;
   }
 
-  /* Timeline / education */
-  .edu-row { display: flex; gap: 20px; align-items: flex-start; }
-  .edu-row .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--blue); margin-top: 7px; flex-shrink: 0; }
+  /* Education */
   .edu-row h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.25px; margin-bottom: 4px; }
   .edu-row .sub { font-size: 14px; font-weight: 600; color: var(--text-2); margin-bottom: 6px; }
   .edu-row p { color: var(--text-2); font-size: 15px; }
@@ -166,56 +171,59 @@
 <nav>
   <div class="container">
     <a class="brand" href="#top">Mahesh Pentu</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a class="nav-cta" href="cv/CV_Mahesh_Pentu_EN.docx">Download CV</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about" data-i18n="nav_about">About</a></li>
+        <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+        <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
+        <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+        <li><a href="#education" data-i18n="nav_education">Education</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <button class="lang-btn" id="lang-btn" onclick="toggleLang()" aria-label="Switch language">IT</button>
+      <a class="nav-cta" id="cv-link" href="cv/CV_Mahesh_Pentu_EN.docx" data-i18n="nav_cv">Download CV</a>
+    </div>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="container">
-    <span class="hero-badge">BSc Data Analysis · 80/100 · Vanvitelli University, Caserta</span>
-    <h1>Turning messy data<br>into <span class="accent">clear decisions</span>.</h1>
-    <p class="subtitle">Junior Data Analyst — BI &amp; Reporting · Data Quality</p>
-    <p class="lead">Data Analysis graduate with hands-on experience in data quality control, data entry supervision and reporting. I catch the errors everyone else misses — then I turn the cleaned data into answers. Trilingual, detail-obsessed, based in Caserta, Italy and fully available to relocate across Italy and the EU.</p>
+    <span class="hero-badge" data-i18n="hero_badge">BSc Data Analysis · 80/100 · Vanvitelli University, Caserta</span>
+    <h1><span data-i18n="hero_p1">Turning messy data</span><br><span data-i18n="hero_p3">into</span> <span class="accent" data-i18n="hero_p2">clear decisions.</span></h1>
+    <p class="subtitle" data-i18n="hero_sub">Junior Data Analyst — BI &amp; Reporting · Data Quality</p>
+    <p class="lead" data-i18n="hero_lead">Data Analysis graduate with hands-on experience in data quality control, data entry supervision and reporting. I catch the errors everyone else misses — then I turn the cleaned data into answers. Trilingual, detail-obsessed, based in Caserta, Italy and fully available to relocate across Italy and the EU.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#projects">See my projects</a>
-      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      <a class="btn btn-primary" href="#projects" data-i18n="hero_btn1">See my projects</a>
+      <a class="btn btn-ghost" href="#contact" data-i18n="hero_btn2">Get in touch</a>
     </div>
-    <div class="hero-meta">Caserta, Italy · Driving licence A+B · Open to junior roles, BI support &amp; internships</div>
+    <div class="hero-meta" data-i18n="hero_meta">Caserta, Italy · Driving licence A+B · Open to junior roles, BI support &amp; internships</div>
   </div>
 </header>
 
 <section>
   <div class="container">
     <div class="metrics">
-      <div class="metric"><div class="num">80<span style="font-size:20px">/100</span></div><div class="lbl">BSc Data Analysis grade</div></div>
-      <div class="metric"><div class="num">1+<span style="font-size:20px"> yr</span></div><div class="lbl">Data supervision &amp; QA experience</div></div>
-      <div class="metric"><div class="num">3</div><div class="lbl">Languages: Telugu · Italian · English</div></div>
-      <div class="metric"><div class="num">487</div><div class="lbl">Transactions analysed in my thesis</div></div>
+      <div class="metric"><div class="num">80<span style="font-size:20px">/100</span></div><div class="lbl" data-i18n="m1">BSc Data Analysis grade</div></div>
+      <div class="metric"><div class="num">1+<span style="font-size:20px"> yr</span></div><div class="lbl" data-i18n="m2">Data supervision &amp; QA experience</div></div>
+      <div class="metric"><div class="num">3</div><div class="lbl" data-i18n="m3">Languages: Telugu · Italian · English</div></div>
+      <div class="metric"><div class="num">487</div><div class="lbl" data-i18n="m4">Transactions analysed in my thesis</div></div>
     </div>
   </div>
 </section>
 
 <section class="alt" id="about">
   <div class="container">
-    <div class="section-label">About</div>
-    <h2 class="section-title">The person behind the pivot tables</h2>
-    <p class="section-intro">I graduated in Data Analysis from Università della Campania "Luigi Vanvitelli" (July 2026) with 80/100, after proving myself in professional data work. My edge: I've been on the operational side of data — supervising teams, cleaning and verifying large datasets, building reports that people actually use. I know the difference between data that looks right and data that <em>is</em> right.</p>
+    <div class="section-label" data-i18n="about_label">About</div>
+    <h2 class="section-title" data-i18n="about_title">The person behind the pivot tables</h2>
+    <p class="section-intro" data-i18n-html="about_intro">I graduated in Data Analysis from Università della Campania "Luigi Vanvitelli" (July 2026) with 80/100, after proving myself in professional data work. My edge: I've been on the operational side of data — supervising teams, cleaning and verifying large datasets, building reports that people actually use. I know the difference between data that looks right and data that <em>is</em> right.</p>
     <div class="grid grid-2">
       <div class="card">
-        <h3>What I bring</h3>
-        <p>Advanced Excel (formulas, pivot tables, filters), a strict eye for data quality, structured reporting, and the statistical grounding from my degree — spatial regression, statistics, relational databases.</p>
+        <h3 data-i18n="about_c1t">What I bring</h3>
+        <p data-i18n="about_c1p">Advanced Excel (formulas, pivot tables, filters), a strict eye for data quality, structured reporting, and the statistical grounding from my degree — spatial regression, statistics, relational databases.</p>
       </div>
       <div class="card">
-        <h3>What I want</h3>
-        <p>A first role as Junior Data Analyst, BI support or data-driven operational position — full-time, fixed-term or internship. I'm ready to start immediately and move anywhere in Italy or the EU.</p>
+        <h3 data-i18n="about_c2t">What I want</h3>
+        <p data-i18n="about_c2p">A first role as Junior Data Analyst, BI support or data-driven operational position — full-time, fixed-term or internship. I'm ready to start immediately and move anywhere in Italy or the EU.</p>
       </div>
     </div>
   </div>
@@ -223,39 +231,39 @@
 
 <section id="skills">
   <div class="container">
-    <div class="section-label">Skills</div>
-    <h2 class="section-title">Tools I work with</h2>
-    <p class="section-intro">Built through coursework, two years of professional work, and real personal projects.</p>
+    <div class="section-label" data-i18n="skills_label">Skills</div>
+    <h2 class="section-title" data-i18n="skills_title">Tools I work with</h2>
+    <p class="section-intro" data-i18n="skills_intro">Built through coursework, professional experience, and real personal projects.</p>
     <div class="grid grid-3">
       <div class="card skill-card">
-        <h4>📊 Data &amp; Analysis</h4>
+        <h4 data-i18n="sk1_t">📊 Data &amp; Analysis</h4>
         <div class="pill-row">
-          <span class="pill">Excel (advanced)</span>
-          <span class="pill">Pivot tables</span>
-          <span class="pill">Data cleaning</span>
-          <span class="pill">Statistics</span>
-          <span class="pill">Spatial regression</span>
-          <span class="pill">Reporting</span>
+          <span class="pill" data-i18n="sk1_a">Excel (advanced)</span>
+          <span class="pill" data-i18n="sk1_b">Pivot tables</span>
+          <span class="pill" data-i18n="sk1_c">Data cleaning</span>
+          <span class="pill" data-i18n="sk1_d">Statistics</span>
+          <span class="pill" data-i18n="sk1_e">Spatial regression</span>
+          <span class="pill" data-i18n="sk1_f">Reporting</span>
         </div>
       </div>
       <div class="card skill-card">
-        <h4>💻 Technical</h4>
+        <h4 data-i18n="sk2_t">💻 Technical</h4>
         <div class="pill-row">
-          <span class="pill">SQL (basics)</span>
-          <span class="pill">Python (project work)</span>
-          <span class="pill">MS Office</span>
-          <span class="pill">Access</span>
-          <span class="pill">PowerPoint</span>
+          <span class="pill" data-i18n="sk2_a">SQL (basics)</span>
+          <span class="pill" data-i18n="sk2_b">Python (project work)</span>
+          <span class="pill" data-i18n="sk2_c">MS Office</span>
+          <span class="pill" data-i18n="sk2_d">Access</span>
+          <span class="pill" data-i18n="sk2_e">PowerPoint</span>
         </div>
       </div>
       <div class="card skill-card">
-        <h4>🧠 Professional</h4>
+        <h4 data-i18n="sk3_t">🧠 Professional</h4>
         <div class="pill-row">
-          <span class="pill">Data quality assurance</span>
-          <span class="pill">Data verification</span>
-          <span class="pill">Team supervision</span>
-          <span class="pill">Attention to detail</span>
-          <span class="pill">Trilingual communication</span>
+          <span class="pill" data-i18n="sk3_a">Data quality assurance</span>
+          <span class="pill" data-i18n="sk3_b">Data verification</span>
+          <span class="pill" data-i18n="sk3_c">Team supervision</span>
+          <span class="pill" data-i18n="sk3_d">Attention to detail</span>
+          <span class="pill" data-i18n="sk3_e">Trilingual communication</span>
         </div>
       </div>
     </div>
@@ -264,14 +272,14 @@
 
 <section class="alt" id="experience">
   <div class="container">
-    <div class="section-label">Experience</div>
-    <h2 class="section-title">Where I've proven it</h2>
+    <div class="section-label" data-i18n="exp_label">Experience</div>
+    <h2 class="section-title" data-i18n="exp_title">Where I've proven it</h2>
     <div class="grid grid-2">
       <div class="card">
-        <div class="role">Data Entry Supervisor</div>
+        <div class="role" data-i18n="exp1_role">Data Entry Supervisor</div>
         <h3>RK IT Solutions</h3>
         <div class="dates">Hyderabad, India · 2021 – 2022</div>
-        <p>Supervised a data entry team; performed data quality control, verification and cleaning of large datasets; prepared status reports; ensured accuracy and consistency of processed information.</p>
+        <p data-i18n="exp1_p">Supervised a data entry team; performed data quality control, verification and cleaning of large datasets; prepared status reports; ensured accuracy and consistency of processed information.</p>
       </div>
     </div>
   </div>
@@ -279,33 +287,33 @@
 
 <section id="projects">
   <div class="container">
-    <div class="section-label">Projects</div>
-    <h2 class="section-title">Things I've actually built</h2>
-    <p class="section-intro">Real work, real data — not tutorial copies.</p>
+    <div class="section-label" data-i18n="proj_label">Projects</div>
+    <h2 class="section-title" data-i18n="proj_title">Things I've actually built</h2>
+    <p class="section-intro" data-i18n="proj_intro">Real work, real data — not tutorial copies.</p>
     <div class="grid grid-2">
       <div class="card">
-        <h3>Spatial Regression on Campania Housing Prices</h3>
-        <div class="dates">Bachelor thesis · Università della Campania "Luigi Vanvitelli" · 2026</div>
-        <p>Analysed 487 real estate transactions across Campania to measure how location truly drives price. When spatial effects are modelled properly, the famous "coastal premium" turns out to be <strong>overestimated by ~44%</strong> — a result that surprised even my supervisors.</p>
-        <div class="tags"><span class="tag">Spatial regression</span><span class="tag">Statistics</span><span class="tag">Geospatial analysis</span><span class="tag">487 transactions</span></div>
+        <h3 data-i18n="p1_t">Spatial Regression on Campania Housing Prices</h3>
+        <div class="dates" data-i18n="p1_d">Bachelor thesis · Università della Campania "Luigi Vanvitelli" · 2026</div>
+        <p data-i18n-html="p1_p">Analysed 487 real estate transactions across Campania to measure how location truly drives price. When spatial effects are modelled properly, the famous "coastal premium" turns out to be <strong>overestimated by ~44%</strong> — a result that surprised even my supervisors.</p>
+        <div class="tags"><span class="tag" data-i18n="p1_t1">Spatial regression</span><span class="tag" data-i18n="p1_t2">Statistics</span><span class="tag" data-i18n="p1_t3">Geospatial analysis</span><span class="tag" data-i18n="p1_t4">487 transactions</span></div>
       </div>
       <div class="card">
-        <h3>Autonomous Crypto Trading Research System</h3>
-        <div class="dates">Personal project · Python · 2026</div>
-        <p>Built a complete backtesting and paper-trading system: pulled 8 years of real market data, stress-tested trend-following strategies across bull and bear markets, and deployed an autonomous paper-trading bot that trades and reports daily. The system is designed to survive crashes, not chase them.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Data analysis</span><span class="tag">Backtesting</span><span class="tag">Automation</span></div>
+        <h3 data-i18n="p2_t">Autonomous Crypto Trading Research System</h3>
+        <div class="dates" data-i18n="p2_d">Personal project · Python · 2026</div>
+        <p data-i18n="p2_p">Built a complete backtesting and paper-trading system: pulled 8 years of real market data, stress-tested trend-following strategies across bull and bear markets, and deployed an autonomous paper-trading bot that trades and reports daily. The system is designed to survive crashes, not chase them.</p>
+        <div class="tags"><span class="tag" data-i18n="p2_t1">Python</span><span class="tag" data-i18n="p2_t2">Data analysis</span><span class="tag" data-i18n="p2_t3">Backtesting</span><span class="tag" data-i18n="p2_t4">Automation</span></div>
       </div>
       <div class="card">
-        <h3>Automated Data Pipeline — Web Scraping &amp; Outreach</h3>
-        <div class="dates">Personal project · Python · 2026</div>
-        <p>Designed and ran an automated pipeline that harvested and verified ~180 real business contacts from company websites (with deduplication and validation), then sent tailored outreach with automatic cooldown management and response detection. Scraping, API work, and process automation end to end.</p>
-        <div class="tags"><span class="tag">Web scraping</span><span class="tag">APIs</span><span class="tag">Automation</span><span class="tag">Data validation</span></div>
+        <h3 data-i18n="p3_t">Automated Data Pipeline — Web Scraping &amp; Outreach</h3>
+        <div class="dates" data-i18n="p3_d">Personal project · Python · 2026</div>
+        <p data-i18n="p3_p">Designed and ran an automated pipeline that harvested and verified ~180 real business contacts from company websites (with deduplication and validation), then sent tailored outreach with automatic cooldown management and response detection. Scraping, API work, and process automation end to end.</p>
+        <div class="tags"><span class="tag" data-i18n="p3_t1">Web scraping</span><span class="tag" data-i18n="p3_t2">APIs</span><span class="tag" data-i18n="p3_t3">Automation</span><span class="tag" data-i18n="p3_t4">Data validation</span></div>
       </div>
       <div class="card">
-        <h3>Data Quality &amp; Verification Workflows</h3>
+        <h3 data-i18n="p4_t">Data Quality &amp; Verification Workflows</h3>
         <div class="dates">RK IT Solutions · 2021 – 2022</div>
-        <p>Designed the verification workflow for a large-scale data entry operation: double-check rules, error tracking, and weekly accuracy reports that reduced rework and kept the team accountable with numbers.</p>
-        <div class="tags"><span class="tag">Excel</span><span class="tag">Data quality</span><span class="tag">Process design</span></div>
+        <p data-i18n="p4_p">Designed the verification workflow for a large-scale data entry operation: double-check rules, error tracking, and weekly accuracy reports that reduced rework and kept the team accountable with numbers.</p>
+        <div class="tags"><span class="tag" data-i18n="p4_t1">Excel</span><span class="tag" data-i18n="p4_t2">Data quality</span><span class="tag" data-i18n="p4_t3">Process design</span></div>
       </div>
     </div>
   </div>
@@ -313,23 +321,23 @@
 
 <section class="alt" id="education">
   <div class="container">
-    <div class="section-label">Education</div>
-    <h2 class="section-title">Education &amp; languages</h2>
+    <div class="section-label" data-i18n="edu_label">Education</div>
+    <h2 class="section-title" data-i18n="edu_title">Education &amp; languages</h2>
     <div class="grid grid-2">
-      <div class="card edu-row" style="display:block">
-        <h3>BSc Data Analysis — 80/100</h3>
-        <div class="sub">Università della Campania "Luigi Vanvitelli", Caserta · Graduated July 2026</div>
-        <p>Coursework: statistics, data analysis, relational database fundamentals, data quality and reporting. Thesis on spatial regression supervised by Prof. Verde and Prof. Balzanella.</p>
+      <div class="card edu-row">
+        <h3 data-i18n="edu1_t">BSc Data Analysis — 80/100</h3>
+        <div class="sub" data-i18n="edu1_s">Università della Campania "Luigi Vanvitelli", Caserta · Graduated July 2026</div>
+        <p data-i18n="edu1_p">Coursework: statistics, data analysis, relational database fundamentals, data quality and reporting. Thesis on spatial regression supervised by Prof. Verde and Prof. Balzanella.</p>
       </div>
       <div class="card">
-        <h3>Languages</h3>
+        <h3 data-i18n="edu2_t">Languages</h3>
         <div class="pill-row" style="margin-top:14px">
-          <span class="pill">Telugu — native</span>
-          <span class="pill">Italian — professional</span>
-          <span class="pill">English — professional</span>
+          <span class="pill" data-i18n="edu2_a">Telugu — native</span>
+          <span class="pill" data-i18n="edu2_b">Italian — professional</span>
+          <span class="pill" data-i18n="edu2_c">English — professional</span>
         </div>
-        <div style="margin-top:20px"><h3 style="font-size:18px">Availability</h3>
-        <p style="margin-top:6px">Based in Caserta, Italy. Student residence permit in conversion to job-seeker permit. Fully available to relocate across Italy and the EU. Driving licence A+B.</p></div>
+        <div style="margin-top:20px"><h3 style="font-size:18px" data-i18n="edu3_t">Availability</h3>
+        <p style="margin-top:6px" data-i18n="edu3_p">Based in Caserta, Italy. Student residence permit in conversion to job-seeker permit. Fully available to relocate across Italy and the EU. Driving licence A+B.</p></div>
       </div>
     </div>
   </div>
@@ -337,31 +345,166 @@
 
 <section id="contact">
   <div class="container">
-    <div class="section-label">Contact</div>
-    <h2 class="section-title">Let's talk data</h2>
-    <p class="section-intro">I reply fast, I'm ready to start, and I'll bring the same attention to detail I apply to data.</p>
+    <div class="section-label" data-i18n="ct_label">Contact</div>
+    <h2 class="section-title" data-i18n="ct_title">Let's talk data</h2>
+    <p class="section-intro" data-i18n="ct_intro">I reply fast, I'm ready to start, and I'll bring the same attention to detail I apply to data.</p>
     <div class="contact-list">
       <a class="contact-row" href="mailto:pentu.mahesh0104@gmail.com">
         <span class="ico">✉️</span>
-        <div><div class="lbl">Email</div><div class="val">pentu.mahesh0104@gmail.com</div></div>
+        <div><div class="lbl" data-i18n="ct_email">Email</div><div class="val">pentu.mahesh0104@gmail.com</div></div>
       </a>
       <a class="contact-row" href="https://www.linkedin.com/in/mahesh-pentu-6b48b632b" target="_blank" rel="noopener">
         <span class="ico">💼</span>
-        <div><div class="lbl">LinkedIn</div><div class="val">linkedin.com/in/mahesh-pentu-6b48b632b</div></div>
+        <div><div class="lbl" data-i18n="ct_li">LinkedIn</div><div class="val">linkedin.com/in/mahesh-pentu-6b48b632b</div></div>
       </a>
-      <a class="contact-row" href="cv/CV_Mahesh_Pentu_EN.docx">
+      <a class="contact-row" id="cv-link2" href="cv/CV_Mahesh_Pentu_EN.docx">
         <span class="ico">📄</span>
-        <div><div class="lbl">Curriculum</div><div class="val">Download CV (English) — Italian version also available</div></div>
+        <div><div class="lbl" data-i18n="ct_cv">Curriculum</div><div class="val" data-i18n="ct_cvv">Download CV (English) — Italian version also available</div></div>
       </a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="container">
-    © 2026 Mahesh Pentu · Caserta, Italy · Built with data and care
-  </div>
+  <div class="container" data-i18n="footer">© 2026 Mahesh Pentu · Caserta, Italy · Built with data and care</div>
 </footer>
+
+<script>
+var I18N = {
+  nav_about:    {en:"About", it:"Chi sono"},
+  nav_skills:   {en:"Skills", it:"Competenze"},
+  nav_experience:{en:"Experience", it:"Esperienza"},
+  nav_projects: {en:"Projects", it:"Progetti"},
+  nav_education:{en:"Education", it:"Formazione"},
+  nav_contact:  {en:"Contact", it:"Contatti"},
+  nav_cv:       {en:"Download CV", it:"Scarica CV"},
+  hero_badge:   {en:"BSc Data Analysis · 80/100 · Vanvitelli University, Caserta", it:"Laurea in Data Analysis · 80/100 · Università Vanvitelli, Caserta"},
+  hero_p1:      {en:"Turning messy data", it:"Trasformo dati disordinati"},
+  hero_p3:      {en:"into", it:"in"},
+  hero_p2:      {en:"clear decisions.", it:"decisioni chiare."},
+  hero_sub:     {en:"Junior Data Analyst — BI & Reporting · Data Quality", it:"Junior Data Analyst — BI e Reporting · Data Quality"},
+  hero_lead:    {en:"Data Analysis graduate with hands-on experience in data quality control, data entry supervision and reporting. I catch the errors everyone else misses — then I turn the cleaned data into answers. Trilingual, detail-obsessed, based in Caserta, Italy and fully available to relocate across Italy and the EU.", it:"Laureato in Data Analysis con esperienza concreta nel controllo qualità dei dati, nella supervisione di data entry e nel reporting. Colgo gli errori che nessun altro vede — poi trasformo i dati puliti in risposte. Trilingue, attento ai dettagli, residente a Caserta e pienamente disponibile a trasferimenti in Italia e in Europa."},
+  hero_btn1:    {en:"See my projects", it:"Vedi i miei progetti"},
+  hero_btn2:    {en:"Get in touch", it:"Contattami"},
+  hero_meta:    {en:"Caserta, Italy · Driving licence A+B · Open to junior roles, BI support & internships", it:"Caserta, Italia · Patente A+B · Disponibile a ruoli junior, supporto BI e tirocini"},
+  m1:           {en:"BSc Data Analysis grade", it:"Voto di laurea in Data Analysis"},
+  m2:           {en:"Data supervision & QA experience", it:"Esperienza in supervisione dati e QA"},
+  m3:           {en:"Languages: Telugu · Italian · English", it:"Lingue: Telugu · Italiano · Inglese"},
+  m4:           {en:"Transactions analysed in my thesis", it:"Transazioni analizzate nella tesi"},
+  about_label:  {en:"About", it:"Chi sono"},
+  about_title:  {en:"The person behind the pivot tables", it:"La persona dietro le tabelle pivot"},
+  about_intro:  {en:"I graduated in Data Analysis from Università della Campania \"Luigi Vanvitelli\" (July 2026) with 80/100, after proving myself in professional data work. My edge: I've been on the operational side of data — supervising teams, cleaning and verifying large datasets, building reports that people actually use. I know the difference between data that looks right and data that <em>is</em> right.", it:"Mi sono laureato in Data Analysis all'Università della Campania \"Luigi Vanvitelli\" (luglio 2026) con 80/100, dopo essermi formato nel lavoro con i dati. Il mio punto di forza: sono stato dalla parte operativa dei dati — supervisionando team, pulendo e verificando grandi set di dati, costruendo report che le persone usano davvero. Conosco la differenza tra dati che sembrano giusti e dati che <em>lo sono</em>."},
+  about_c1t:    {en:"What I bring", it:"Cosa porto"},
+  about_c1p:    {en:"Advanced Excel (formulas, pivot tables, filters), a strict eye for data quality, structured reporting, and the statistical grounding from my degree — spatial regression, statistics, relational databases.", it:"Excel avanzato (formule, tabelle pivot, filtri), occhio attento alla qualità dei dati, reporting strutturato e solide basi statistiche dalla laurea — regressione spaziale, statistica, basi di dati relazionali."},
+  about_c2t:    {en:"What I want", it:"Cosa cerco"},
+  about_c2p:    {en:"A first role as Junior Data Analyst, BI support or data-driven operational position — full-time, fixed-term or internship. I'm ready to start immediately and move anywhere in Italy or the EU.", it:"Un primo ruolo come Junior Data Analyst, supporto BI o posizione operativa data-driven — full-time, a tempo determinato o tirocinio. Pronto a iniziare subito e a trasferirmi in qualsiasi città d'Italia o d'Europa."},
+  skills_label: {en:"Skills", it:"Competenze"},
+  skills_title: {en:"Tools I work with", it:"Gli strumenti che uso"},
+  skills_intro: {en:"Built through coursework, professional experience, and real personal projects.", it:"Costruite attraverso gli studi, l'esperienza professionale e progetti personali reali."},
+  sk1_t:        {en:"📊 Data & Analysis", it:"📊 Dati e Analisi"},
+  sk1_a:        {en:"Excel (advanced)", it:"Excel (avanzato)"},
+  sk1_b:        {en:"Pivot tables", it:"Tabelle pivot"},
+  sk1_c:        {en:"Data cleaning", it:"Pulizia dati"},
+  sk1_d:        {en:"Statistics", it:"Statistica"},
+  sk1_e:        {en:"Spatial regression", it:"Regressione spaziale"},
+  sk1_f:        {en:"Reporting", it:"Reporting"},
+  sk2_t:        {en:"💻 Technical", it:"💻 Tecnico"},
+  sk2_a:        {en:"SQL (basics)", it:"SQL (basi)"},
+  sk2_b:        {en:"Python (project work)", it:"Python (progetti)"},
+  sk2_c:        {en:"MS Office", it:"MS Office"},
+  sk2_d:        {en:"Access", it:"Access"},
+  sk2_e:        {en:"PowerPoint", it:"PowerPoint"},
+  sk3_t:        {en:"🧠 Professional", it:"🧠 Professionali"},
+  sk3_a:        {en:"Data quality assurance", it:"Garanzia qualità dati"},
+  sk3_b:        {en:"Data verification", it:"Verifica dati"},
+  sk3_c:        {en:"Team supervision", it:"Supervisione team"},
+  sk3_d:        {en:"Attention to detail", it:"Attenzione al dettaglio"},
+  sk3_e:        {en:"Trilingual communication", it:"Comunicazione trilingue"},
+  exp_label:    {en:"Experience", it:"Esperienza"},
+  exp_title:    {en:"Where I've proven it", it:"Dove l'ho dimostrato"},
+  exp1_role:    {en:"Data Entry Supervisor", it:"Supervisore Data Entry"},
+  exp1_p:       {en:"Supervised a data entry team; performed data quality control, verification and cleaning of large datasets; prepared status reports; ensured accuracy and consistency of processed information.", it:"Supervisione di un team di data entry; controllo qualità, verifica e pulizia di grandi set di dati; preparazione di report di stato; garanzia di accuratezza e coerenza delle informazioni processate."},
+  proj_label:   {en:"Projects", it:"Progetti"},
+  proj_title:   {en:"Things I've actually built", it:"Cose che ho costruito davvero"},
+  proj_intro:   {en:"Real work, real data — not tutorial copies.", it:"Lavoro vero, dati veri — non copie da tutorial."},
+  p1_t:         {en:"Spatial Regression on Campania Housing Prices", it:"Regressione Spaziale sui Prezzi Immobiliari in Campania"},
+  p1_d:         {en:"Bachelor thesis · Università della Campania \"Luigi Vanvitelli\" · 2026", it:"Tesi di laurea · Università della Campania \"Luigi Vanvitelli\" · 2026"},
+  p1_p:         {en:"Analysed 487 real estate transactions across Campania to measure how location truly drives price. When spatial effects are modelled properly, the famous \"coastal premium\" turns out to be <strong>overestimated by ~44%</strong> — a result that surprised even my supervisors.", it:"Analizzate 487 transazioni immobiliari in Campania per misurare come la posizione influisce davvero sul prezzo. Quando gli effetti spaziali sono modellati correttamente, il famoso \"premio costiero\" risulta <strong>sovrastimato di circa il 44%</strong> — un risultato che ha sorpreso persino i miei relatori."},
+  p1_t1:        {en:"Spatial regression", it:"Regressione spaziale"},
+  p1_t2:        {en:"Statistics", it:"Statistica"},
+  p1_t3:        {en:"Geospatial analysis", it:"Analisi geospaziale"},
+  p1_t4:        {en:"487 transactions", it:"487 transazioni"},
+  p2_t:         {en:"Autonomous Crypto Trading Research System", it:"Sistema Autonomo di Ricerca sul Trading Crypto"},
+  p2_d:         {en:"Personal project · Python · 2026", it:"Progetto personale · Python · 2026"},
+  p2_p:         {en:"Built a complete backtesting and paper-trading system: pulled 8 years of real market data, stress-tested trend-following strategies across bull and bear markets, and deployed an autonomous paper-trading bot that trades and reports daily. The system is designed to survive crashes, not chase them.", it:"Costruito un sistema completo di backtesting e paper trading: scaricati 8 anni di dati di mercato reali, stress-testate strategie di trend following in mercati rialzisti e ribassisti, e lanciato un bot autonomo di paper trading che opera e riporta ogni giorno. Il sistema è progettato per sopravvivere ai crolli, non per inseguirli."},
+  p2_t1:        {en:"Python", it:"Python"},
+  p2_t2:        {en:"Data analysis", it:"Analisi dati"},
+  p2_t3:        {en:"Backtesting", it:"Backtesting"},
+  p2_t4:        {en:"Automation", it:"Automazione"},
+  p3_t:         {en:"Automated Data Pipeline — Web Scraping & Outreach", it:"Pipeline Dati Automatica — Web Scraping e Outreach"},
+  p3_d:         {en:"Personal project · Python · 2026", it:"Progetto personale · Python · 2026"},
+  p3_p:         {en:"Designed and ran an automated pipeline that harvested and verified ~180 real business contacts from company websites (with deduplication and validation), then sent tailored outreach with automatic cooldown management and response detection. Scraping, API work, and process automation end to end.", it:"Progettata e gestita una pipeline automatica che ha raccolto e verificato ~180 contatti aziendali reali dai siti web (con deduplicazione e validazione), inviando poi comunicazioni personalizzate con gestione automatica dei tempi e rilevamento delle risposte. Scraping, API e automazione di processo end-to-end."},
+  p3_t1:        {en:"Web scraping", it:"Web scraping"},
+  p3_t2:        {en:"APIs", it:"API"},
+  p3_t3:        {en:"Automation", it:"Automazione"},
+  p3_t4:        {en:"Data validation", it:"Validazione dati"},
+  p4_t:         {en:"Data Quality & Verification Workflows", it:"Workflow di Qualità e Verifica dei Dati"},
+  p4_p:         {en:"Designed the verification workflow for a large-scale data entry operation: double-check rules, error tracking, and weekly accuracy reports that reduced rework and kept the team accountable with numbers.", it:"Progettato il workflow di verifica per un'operazione di data entry su larga scala: regole di doppio controllo, tracciamento degli errori e report settimanali di accuratezza che hanno ridotto le rilavorazioni e reso il team responsabile con i numeri."},
+  p4_t1:        {en:"Excel", it:"Excel"},
+  p4_t2:        {en:"Data quality", it:"Qualità dati"},
+  p4_t3:        {en:"Process design", it:"Progettazione processi"},
+  edu_label:    {en:"Education", it:"Formazione"},
+  edu_title:    {en:"Education & languages", it:"Formazione e lingue"},
+  edu1_t:       {en:"BSc Data Analysis — 80/100", it:"Laurea in Data Analysis — 80/100"},
+  edu1_s:       {en:"Università della Campania \"Luigi Vanvitelli\", Caserta · Graduated July 2026", it:"Università della Campania \"Luigi Vanvitelli\", Caserta · Laureato luglio 2026"},
+  edu1_p:       {en:"Coursework: statistics, data analysis, relational database fundamentals, data quality and reporting. Thesis on spatial regression supervised by Prof. Verde and Prof. Balzanella.", it:"Corsi: statistica, analisi dei dati, fondamenti di basi di dati relazionali, qualità dei dati e reporting. Tesi in regressione spaziale con i prof. Verde e Balzanella."},
+  edu2_t:       {en:"Languages", it:"Lingue"},
+  edu2_a:       {en:"Telugu — native", it:"Telugu — madrelingua"},
+  edu2_b:       {en:"Italian — professional", it:"Italiano — professionale"},
+  edu2_c:       {en:"English — professional", it:"Inglese — professionale"},
+  edu3_t:       {en:"Availability", it:"Disponibilità"},
+  edu3_p:       {en:"Based in Caserta, Italy. Student residence permit in conversion to job-seeker permit. Fully available to relocate across Italy and the EU. Driving licence A+B.", it:"Residente a Caserta, Italia. Permesso di soggiorno per motivi di studio in conversione a permesso per attesa occupazione. Pienamente disponibile a trasferimenti in Italia e in Europa. Patente A+B."},
+  ct_label:     {en:"Contact", it:"Contatti"},
+  ct_title:     {en:"Let's talk data", it:"Parliamo di dati"},
+  ct_intro:     {en:"I reply fast, I'm ready to start, and I'll bring the same attention to detail I apply to data.", it:"Rispondo in fretta, sono pronto a iniziare e porto la stessa attenzione ai dettagli che metto nei dati."},
+  ct_email:     {en:"Email", it:"Email"},
+  ct_li:        {en:"LinkedIn", it:"LinkedIn"},
+  ct_cv:        {en:"Curriculum", it:"Curriculum"},
+  ct_cvv:       {en:"Download CV (English) — Italian version also available", it:"Scarica CV (Italiano) — versione inglese disponibile"},
+  footer:       {en:"© 2026 Mahesh Pentu · Caserta, Italy · Built with data and care", it:"© 2026 Mahesh Pentu · Caserta, Italia · Costruito con dati e cura"}
+};
+
+var currentLang = 'en';
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  var nodes = document.querySelectorAll('[data-i18n]');
+  for (var i = 0; i < nodes.length; i++) {
+    var k = nodes[i].getAttribute('data-i18n');
+    if (I18N[k]) nodes[i].textContent = I18N[k][lang];
+  }
+  var htmlNodes = document.querySelectorAll('[data-i18n-html]');
+  for (var j = 0; j < htmlNodes.length; j++) {
+    var k2 = htmlNodes[j].getAttribute('data-i18n-html');
+    if (I18N[k2]) htmlNodes[j].innerHTML = I18N[k2][lang];
+  }
+  document.getElementById('cv-link').href = lang === 'it' ? 'cv/CV_Mahesh_Pentu_IT.docx' : 'cv/CV_Mahesh_Pentu_EN.docx';
+  document.getElementById('cv-link2').href = lang === 'it' ? 'cv/CV_Mahesh_Pentu_IT.docx' : 'cv/CV_Mahesh_Pentu_EN.docx';
+  document.getElementById('lang-btn').textContent = lang === 'it' ? 'EN' : 'IT';
+  try { localStorage.setItem('portfolio-lang', lang); } catch (e) {}
+}
+function toggleLang() {
+  applyLang(currentLang === 'it' ? 'en' : 'it');
+}
+(function init() {
+  var saved = null;
+  try { saved = localStorage.getItem('portfolio-lang'); } catch (e) {}
+  if (saved === 'it' || saved === 'en') { applyLang(saved); return; }
+  var nav = (navigator.language || 'en').toLowerCase();
+  applyLang(nav.indexOf('it') === 0 ? 'it' : 'en');
+})();
+window.applyLang = applyLang;
+</script>
 
 </body>
 </html>
