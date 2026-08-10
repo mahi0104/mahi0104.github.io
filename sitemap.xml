@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mahi0104.github.io/</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mahi0104.github.io/hero.jpg</loc>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+  <url>
+    <loc>https://mahi0104.github.io/docs/Thesis_Spatial_Regression_Campania.pdf</loc>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+  <url>
+    <loc>https://mahi0104.github.io/docs/Thesis_Defense_Presentation.pptx</loc>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+  <url>
+    <loc>https://mahi0104.github.io/docs/campania_spatial_lite.py</loc>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+  <url>
+    <loc>https://mahi0104.github.io/docs/campania_spatial_dataset_SAMPLE.xlsx</loc>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+  <url>
+    <loc>https://mahi0104.github.io/cv/CV_Mahesh_Pentu_EN.docx</loc>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+  <url>
+    <loc>https://mahi0104.github.io/cv/CV_Mahesh_Pentu_IT.docx</loc>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+</urlset>
