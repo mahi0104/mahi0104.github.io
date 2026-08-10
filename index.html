@@ -43,6 +43,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -245,9 +246,12 @@
   footer a { color: var(--bone-dim); text-decoration: none; }
   footer a:hover { color: var(--amber); }
 
-  @media (max-width: 640px) {
-    section { padding: 64px 0; }
-    header { padding: 120px 0 30px; min-height: 84vh; }
+  @media (max-width: 640px) { section { padding: 64px 0; } header { padding: 120px 0 30px; min-height: 84vh; } }
+  @media (max-width: 720px) {
+    nav .links { gap: 12px; }
+    nav .links a:not(.btn-pill) { display: none; }
+    nav { padding: 14px 18px; }
+    .btn-pill { padding: 8px 14px; font-size: 12px; }
   }
 </style>
 </head>
@@ -668,6 +672,7 @@ window.applyLang = applyLang;
   var ST = (typeof ScrollTrigger !== 'undefined') ? ScrollTrigger : null;
   try { if (ST) gsap.registerPlugin(ST); } catch (e) { ST = null; }
   gsap.defaults({ ease: 'power3.out' });
+  try { gsap.ticker.lagSmoothing(0, 33); } catch (e) {}
 
   try {
     /* Cursor */
@@ -696,22 +701,25 @@ window.applyLang = applyLang;
     }
 
     /* Loader: cycle words, then reveal */
-    var tlLoad = gsap.timeline({ onComplete: hideLoader });
+    var tlLoad = gsap.timeline({ onComplete: function () { hideLoader(); tlHero.play(); } });
     tlLoad
-      .fromTo('#loader .words span:first-child', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 })
-      .to('#loader .words span:first-child', { opacity: 0, y: -14, duration: 0.35 }, '+=0.7')
-      .fromTo('#loader .words span:nth-child(2)', { opacity: 0, y: 14, display: 'block', duration: 0.4 })
-      .to('#loader .words span:nth-child(2)', { opacity: 0, y: -14, duration: 0.35 }, '+=0.7')
-      .fromTo('#loader .words span:nth-child(3)', { opacity: 0, y: 14, display: 'block', duration: 0.4 })
-      .to('#loader', { autoAlpha: 0, duration: 0.45, delay: 0.5 });
+      .fromTo('#loader .words span:first-child', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35 })
+      .to('#loader .words span:first-child', { opacity: 0, y: -14, duration: 0.3 }, '+=0.5')
+      .fromTo('#loader .words span:nth-child(2)', { opacity: 0, y: 14, display: 'block', duration: 0.35 })
+      .to('#loader .words span:nth-child(2)', { opacity: 0, y: -14, duration: 0.3 }, '+=0.5')
+      .fromTo('#loader .words span:nth-child(3)', { opacity: 0, y: 14, display: 'block', duration: 0.35 })
+      .to('#loader', { autoAlpha: 0, duration: 0.4, delay: 0.35 });
 
-    /* Hero entrance */
-    var tlHero = gsap.timeline({ delay: 2.6 });
+    /* Hero entrance: paused, starts only when the loader finishes */
+    var tlHero = gsap.timeline({ paused: true });
     tlHero
-      .from('.hero-badge', { y: 16, autoAlpha: 0, duration: 0.6 })
-      .from('.hero-name .row i', { yPercent: 110, duration: 1, stagger: 0.12, ease: 'power4.out' }, '-=0.3')
-      .from('.hero-avatar', { scale: 0.7, autoAlpha: 0, duration: 0.9 }, '-=0.6')
-      .from('.hero-tag', { y: 18, autoAlpha: 0, duration: 0.7 }, '-=0.5');
+      .from('.hero-badge', { y: 16, autoAlpha: 0, duration: 0.55 })
+      .from('.hero-name .row i', { yPercent: 110, duration: 0.9, stagger: 0.12, ease: 'power4.out' }, '-=0.3')
+      .from('.hero-avatar', { scale: 0.7, autoAlpha: 0, duration: 0.8 }, '-=0.55')
+      .from('.hero-tag', { y: 18, autoAlpha: 0, duration: 0.65 }, '-=0.45');
+
+    /* Watchdog: no matter what, after 7s the loader is gone and the hero is visible */
+    setTimeout(function () { hideLoader(); try { tlHero.play(); } catch (e) {} }, 7000);
 
     /* Section reveals (skipped entirely without ScrollTrigger — content stays visible) */
     if (ST) {
@@ -730,6 +738,15 @@ window.applyLang = applyLang;
     }
   } catch (e) {
     hideLoader();
+    /* If anything threw, force-show ALL content — never leave a blank page */
+    try {
+      gsap.set(['.hero-badge', '.hero-name .row i', '.hero-avatar', '.hero-tag'],
+        { clearProps: 'autoAlpha,visibility,opacity,transform' });
+      gsap.utils.toArray('section').forEach(function (sec) {
+        gsap.set(sec.querySelectorAll('.sec-label, h2, .sec-intro, .card, .stats .stat, .artifact'),
+          { clearProps: 'autoAlpha,visibility,opacity,transform' });
+      });
+    } catch (e2) {}
   }
 })();
 </script>
