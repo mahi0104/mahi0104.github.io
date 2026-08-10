@@ -63,6 +63,17 @@
 
   /* Hero */
   .hero { padding: 96px 0 64px; }
+  .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; }
+  .hero-photo img {
+    width: 300px; height: 300px; border-radius: 50%; object-fit: cover;
+    border: 6px solid #fff; outline: 1px solid rgba(0,0,0,0.08);
+    box-shadow: rgba(0,0,0,0.08) 0px 18px 40px -12px, rgba(0,0,0,0.04) 0px 6px 16px;
+  }
+  @media (max-width: 760px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero-photo { order: -1; display: flex; justify-content: center; }
+    .hero-photo img { width: 220px; height: 220px; }
+  }
   .hero-badge {
     display: inline-block; background: var(--badge-bg); color: var(--badge-text);
     font-size: 12px; font-weight: 600; letter-spacing: 0.125px;
@@ -188,15 +199,22 @@
 
 <header class="hero" id="top">
   <div class="container">
-    <span class="hero-badge" data-i18n="hero_badge">BSc Data Analysis · 80/100 · Vanvitelli University, Caserta</span>
-    <h1><span data-i18n="hero_p1">Turning messy data</span><br><span data-i18n="hero_p3">into</span> <span class="accent" data-i18n="hero_p2">clear decisions.</span></h1>
-    <p class="subtitle" data-i18n="hero_sub">Junior Data Analyst — BI &amp; Reporting · Data Quality</p>
-    <p class="lead" data-i18n="hero_lead">Data Analysis graduate with hands-on experience in data quality control, data entry supervision and reporting. I catch the errors everyone else misses — then I turn the cleaned data into answers. Trilingual, detail-obsessed, based in Caserta, Italy and fully available to relocate across Italy and the EU.</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#projects" data-i18n="hero_btn1">See my projects</a>
-      <a class="btn btn-ghost" href="#contact" data-i18n="hero_btn2">Get in touch</a>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="hero-badge" data-i18n="hero_badge">BSc Data Analysis · 80/100 · Vanvitelli University, Caserta</span>
+        <h1><span data-i18n="hero_p1">Turning messy data</span><br><span data-i18n="hero_p3">into</span> <span class="accent" data-i18n="hero_p2">clear decisions.</span></h1>
+        <p class="subtitle" data-i18n="hero_sub">Junior Data Analyst — BI &amp; Reporting · Data Quality</p>
+        <p class="lead" data-i18n="hero_lead">Data Analysis graduate with hands-on experience in data quality control, data entry supervision and reporting. I catch the errors everyone else misses — then I turn the cleaned data into answers. Trilingual, detail-obsessed, based in Caserta, Italy and fully available to relocate across Italy and the EU.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects" data-i18n="hero_btn1">See my projects</a>
+          <a class="btn btn-ghost" href="#contact" data-i18n="hero_btn2">Get in touch</a>
+        </div>
+        <div class="hero-meta" data-i18n="hero_meta">Caserta, Italy · Driving licence A+B · Open to junior roles, BI support &amp; internships</div>
+      </div>
+      <div class="hero-photo">
+        <img src="hero.jpg" alt="Mahesh Pentu">
+      </div>
     </div>
-    <div class="hero-meta" data-i18n="hero_meta">Caserta, Italy · Driving licence A+B · Open to junior roles, BI support &amp; internships</div>
   </div>
 </header>
 
