@@ -3,488 +3,536 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mahesh Pentu — Junior Data Analyst | BI &amp; Reporting | Data Quality</title>
-<meta name="description" content="Portfolio of Mahesh Pentu — BSc Data Analysis graduate (Vanvitelli, 80/100). Junior Data Analyst skilled in Excel, data quality, reporting, statistics and Python. Based in Caserta, Italy — available across Italy and the EU.">
+<title>Mahesh Pentu — Junior Data Analyst | Spatial Regression | Data Quality</title>
+<meta name="description" content="Portfolio of Mahesh Pentu — BSc Data Analysis graduate (Vanvitelli, 80/100). Spatial regression, data quality, Excel, Python, reporting. Based in Caserta, Italy — available across Italy and the EU.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #ffffff;
-    --bg-warm: #f6f5f4;
-    --text: rgba(0,0,0,0.95);
-    --text-2: #615d59;
-    --text-3: #a39e98;
-    --border: 1px solid rgba(0,0,0,0.1);
-    --blue: #0075de;
-    --blue-active: #005bab;
-    --badge-bg: #f2f9ff;
-    --badge-text: #097fe8;
-    --card-shadow: rgba(0,0,0,0.04) 0px 4px 18px, rgba(0,0,0,0.027) 0px 2.025px 7.84688px, rgba(0,0,0,0.02) 0px 0.8px 2.925px, rgba(0,0,0,0.01) 0px 0.175px 1.04062px;
+    --ink: #0E1016;
+    --ink-2: #12151d;
+    --card: #1a1e29;
+    --card-2: #212531;
+    --line: #2a2f3d;
+    --bone: #e4ded7;
+    --bone-dim: #b9b3ac;
+    --steel: #95979d;
+    --amber: #ffaa40;
+    --violet: #9c40ff;
+    --grad: linear-gradient(92deg, var(--amber), var(--violet));
+    --display: 'Anton', 'Arial Narrow', sans-serif;
+    --body: 'Archivo', 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', 'Consolas', monospace;
+    --pad: clamp(20px, 5vw, 72px);
+    color-scheme: dark;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    color: var(--text);
-    background: var(--bg);
+    font-family: var(--body);
+    background: var(--ink);
+    color: var(--bone);
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.55;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: inherit; }
   .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: var(--mono); }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+  }
 
-  /* Navigation */
+  /* Cursor */
+  #cursor-dot, #cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; }
+  #cursor-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
+  #cursor-ring {
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid rgba(255,170,64,0.45);
+  }
+  @media (pointer: coarse) { #cursor-dot, #cursor-ring { display: none; } }
+
+  /* Scroll progress */
+  #scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 9998;
+    background: var(--grad); transform-origin: 0 50%; transform: scaleX(0);
+  }
+
+  /* Loader */
+  #loader {
+    position: fixed; inset: 0; background: var(--ink); z-index: 10000;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #loader .words { font-family: var(--mono); font-size: clamp(16px, 3vw, 26px); color: var(--bone-dim); }
+  #loader .words span { display: block; }
+  #loader .words span b { color: var(--amber); }
+
+  /* Nav */
   nav {
-    position: sticky; top: 0; background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(8px); border-bottom: var(--border); z-index: 50;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px var(--pad);
+    background: rgba(14,16,22,0.85); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-  nav .container { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
-  .brand { font-weight: 700; font-size: 15px; letter-spacing: -0.2px; text-decoration: none; color: var(--text); white-space: nowrap; }
-  .nav-right { display: flex; align-items: center; gap: 20px; }
-  .nav-links { display: flex; gap: 24px; list-style: none; }
-  .nav-links a {
-    font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none;
-    transition: color 0.15s;
+  nav .brand { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--bone); text-decoration: none; letter-spacing: 0.5px; }
+  nav .brand b { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  nav .links { display: flex; align-items: center; gap: 22px; }
+  nav .links a { font-family: var(--mono); font-size: 13px; color: var(--bone-dim); text-decoration: none; transition: color 0.15s; }
+  nav .links a:hover { color: var(--amber); }
+  .btn-pill {
+    font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+    color: var(--ink); background: var(--grad); border: none; border-radius: 9999px;
+    padding: 9px 18px; text-decoration: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
   }
-  .nav-links a:hover { color: var(--blue); }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,170,64,0.25); }
   .lang-btn {
-    background: transparent; border: 1px solid rgba(0,0,0,0.2); border-radius: 4px;
-    font-size: 13px; font-weight: 600; color: var(--text); padding: 5px 10px;
-    cursor: pointer; transition: all 0.15s;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    color: var(--bone-dim); background: transparent;
+    border: 1px solid var(--line); border-radius: 9999px; padding: 6px 12px; cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
   }
-  .lang-btn:hover { border-color: var(--blue); color: var(--blue); }
-  .nav-cta {
-    background: var(--blue); color: #fff; font-size: 14px; font-weight: 600;
-    padding: 8px 16px; border-radius: 4px; text-decoration: none; transition: background 0.15s; white-space: nowrap;
-  }
-  .nav-cta:hover { background: var(--blue-active); }
-  @media (max-width: 760px) { .nav-links { display: none; } }
+  .lang-btn:hover { border-color: var(--amber); color: var(--amber); }
+  @media (max-width: 640px) { nav .links .hide-mobile { display: none; } }
 
   /* Hero */
-  .hero { padding: 96px 0 64px; position: relative; overflow: hidden; }
-  .hero-dots {
-    position: absolute; inset: 0; pointer-events: none;
-    background-image: radial-gradient(rgba(0,0,0,0.055) 1px, transparent 1px);
-    background-size: 26px 26px;
-    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 75% 30%, black 0%, transparent 70%);
-            mask-image: radial-gradient(ellipse 80% 70% at 75% 30%, black 0%, transparent 70%);
-  }
-  .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; }
-  .hero-photo-wrap { position: relative; }
-  .hero-photo img {
-    width: 300px; height: 300px; border-radius: 50%; object-fit: cover;
-    border: 6px solid #fff; outline: 1px solid rgba(0,0,0,0.08);
-    box-shadow: rgba(0,0,0,0.08) 0px 18px 40px -12px, rgba(0,0,0,0.04) 0px 6px 16px;
-  }
-  .chip {
-    position: absolute; background: #fff; border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 10px; padding: 8px 14px; font-size: 12.5px; font-weight: 600;
-    color: var(--text-2); box-shadow: var(--card-shadow); white-space: nowrap;
-  }
-  .chip b { color: var(--blue); }
-  .chip-1 { top: 12%; right: -18px; }
-  .chip-2 { bottom: 10%; left: -24px; }
-  .hero-spark { position: absolute; right: 28px; bottom: 18px; width: 240px; opacity: 0.55; pointer-events: none; }
-  @media (max-width: 760px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 32px; }
-    .hero-photo { order: -1; display: flex; justify-content: center; }
-    .hero-photo img { width: 220px; height: 220px; }
-  }
-  @media (max-width: 900px) { .chip, .hero-spark { display: none; } }
-  @media (prefers-reduced-motion: reduce) {
-    .chip, .hero-spark, .hero-dots { display: none; }
-  }
+  header { padding: 140px 0 40px; min-height: 92vh; display: flex; align-items: center; }
+  .hero-center { text-align: center; width: 100%; }
   .hero-badge {
-    display: inline-block; background: var(--badge-bg); color: var(--badge-text);
-    font-size: 12px; font-weight: 600; letter-spacing: 0.125px;
-    padding: 4px 10px; border-radius: 9999px; margin-bottom: 24px;
+    display: inline-block; font-family: var(--mono); font-size: 12px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--steel);
+    border: 1px solid var(--line); border-radius: 9999px; padding: 6px 16px; margin-bottom: 34px;
   }
-  .hero h1 {
-    font-size: clamp(40px, 6.5vw, 64px); font-weight: 700; line-height: 1.02;
-    letter-spacing: -2.125px; margin-bottom: 20px;
+  .hero-name { font-family: var(--display); font-weight: 400; line-height: 0.86; letter-spacing: 0.5px; }
+  .hero-name .row { display: block; overflow: hidden; }
+  .hero-name .row i {
+    display: inline-block; font-style: italic; font-size: clamp(72px, 14vw, 190px);
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    padding-right: 0.08em;
   }
-  .hero h1 .accent { color: var(--blue); }
-  .hero .subtitle {
-    font-size: 20px; font-weight: 600; line-height: 1.4; letter-spacing: -0.125px;
-    color: var(--text-2); max-width: 640px; margin-bottom: 16px;
+  .hero-avatar {
+    width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--ink-2); outline: 2px solid var(--amber); outline-offset: -8px;
+    box-shadow: 0 0 0 1px var(--line), 0 18px 50px -12px rgba(0,0,0,0.6);
+    margin: 36px auto 0;
   }
-  .hero p.lead { max-width: 640px; color: var(--text-2); margin-bottom: 32px; }
-  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn {
-    display: inline-block; padding: 9px 18px; border-radius: 4px;
-    font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.15s;
+  .hero-tag {
+    margin-top: 30px; font-family: var(--mono); font-size: clamp(14px, 2.2vw, 18px);
+    color: var(--bone-dim);
   }
-  .btn-primary { background: var(--blue); color: #fff; }
-  .btn-primary:hover { background: var(--blue-active); }
-  .btn-ghost { background: rgba(0,0,0,0.05); color: var(--text); }
-  .btn-ghost:hover { transform: scale(1.03); }
-  .hero-meta { margin-top: 28px; color: var(--text-3); font-size: 14px; font-weight: 500; }
-
-  /* Metrics strip */
-  .metrics {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px; padding: 32px 0 0;
-  }
-  .metric {
-    background: var(--bg-warm); border-radius: 12px; padding: 20px 24px;
-  }
-  .metric .num { font-size: 32px; font-weight: 700; letter-spacing: -1px; color: var(--text); }
-  .metric .lbl { font-size: 14px; font-weight: 500; color: var(--text-2); margin-top: 4px; }
+  .hero-tag b { color: var(--amber); font-weight: 600; }
 
   /* Sections */
-  section { padding: 80px 0; }
-  section.alt { background: var(--bg-warm); }
-  .section-label { font-size: 13px; font-weight: 600; letter-spacing: 0.125px; color: var(--text-3); text-transform: uppercase; margin-bottom: 12px; }
-  h2.section-title {
-    font-size: clamp(32px, 4.5vw, 48px); font-weight: 700; line-height: 1;
-    letter-spacing: -1.5px; margin-bottom: 20px;
+  section { padding: 96px 0; border-top: 1px solid var(--line); }
+  .sec-label {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--steel); margin-bottom: 28px;
   }
-  .section-intro { max-width: 640px; color: var(--text-2); margin-bottom: 40px; }
+  .sec-label b { color: var(--amber); font-weight: 600; margin-right: 14px; }
+  h2 {
+    font-family: var(--display); font-weight: 400; font-size: clamp(38px, 6vw, 68px);
+    line-height: 1; letter-spacing: 0.5px; margin-bottom: 24px;
+  }
+  h2 em { font-style: italic; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sec-intro { max-width: 680px; color: var(--bone-dim); margin-bottom: 48px; font-size: 17px; }
 
   /* Cards */
   .grid { display: grid; gap: 20px; }
   .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
   .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   .card {
-    background: #fff; border: var(--border); border-radius: 12px; padding: 28px;
-    box-shadow: var(--card-shadow); transition: box-shadow 0.2s;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 30px; transition: transform 0.2s, border-color 0.2s;
   }
-  .card:hover { box-shadow: rgba(0,0,0,0.06) 0px 8px 24px, rgba(0,0,0,0.04) 0px 3px 8px; }
-  .card h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.25px; margin-bottom: 8px; }
-  .card .role { font-size: 14px; font-weight: 600; color: var(--blue); margin-bottom: 4px; }
-  .card .dates { font-size: 13px; font-weight: 500; color: var(--text-3); margin-bottom: 12px; }
-  .card p { color: var(--text-2); font-size: 15px; }
+  .card:hover { transform: translateY(-3px); border-color: rgba(255,170,64,0.5); }
+  .card h3 { font-family: var(--display); font-weight: 400; font-size: 26px; letter-spacing: 0.3px; margin-bottom: 10px; }
+  .card h3 em { font-style: italic; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .card .role { font-family: var(--mono); font-size: 12.5px; color: var(--amber); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .card .dates { font-family: var(--mono); font-size: 12.5px; color: var(--steel); margin-bottom: 14px; }
+  .card p { color: var(--bone-dim); font-size: 15px; }
+  .card p strong { color: var(--bone); }
 
-  /* Skill pills */
-  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  /* Pills */
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
   .pill {
-    background: var(--badge-bg); color: var(--badge-text); font-size: 12px; font-weight: 600;
-    letter-spacing: 0.125px; padding: 4px 10px; border-radius: 9999px;
+    font-family: var(--mono); font-size: 12px; color: var(--bone-dim);
+    border: 1px solid var(--line); border-radius: 9999px; padding: 5px 12px;
+    transition: border-color 0.15s, color 0.15s;
   }
-  .skill-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+  .pill:hover { border-color: var(--violet); color: var(--bone); }
 
-  /* Project tags */
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
-  .tag {
-    font-size: 11px; font-weight: 600; color: var(--text-2);
-    border: 1px solid rgba(0,0,0,0.15); padding: 2px 8px; border-radius: 9999px;
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; margin-top: 52px; }
+  .stat { border-top: 1px solid var(--line); padding-top: 18px; }
+  .stat .num { font-family: var(--display); font-size: clamp(40px, 5vw, 58px); line-height: 1; }
+  .stat .num span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat .lbl { font-family: var(--mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--steel); margin-top: 8px; }
+
+  /* Thesis artifacts */
+  .artifacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-top: 34px; }
+  .artifact {
+    display: flex; flex-direction: column; gap: 6px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px; text-decoration: none; transition: border-color 0.15s, transform 0.15s;
   }
-
-  /* Education */
-  .edu-row h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.25px; margin-bottom: 4px; }
-  .edu-row .sub { font-size: 14px; font-weight: 600; color: var(--text-2); margin-bottom: 6px; }
-  .edu-row p { color: var(--text-2); font-size: 15px; }
+  .artifact:hover { border-color: var(--amber); transform: translateY(-2px); }
+  .artifact .ext {
+    font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    color: var(--ink); background: var(--grad); border-radius: 6px;
+    width: fit-content; padding: 3px 8px;
+  }
+  .artifact .name { font-family: var(--mono); font-size: 13.5px; color: var(--bone); }
+  .artifact .meta { font-family: var(--mono); font-size: 11.5px; color: var(--steel); }
 
   /* Contact */
-  .contact-list { display: grid; gap: 16px; max-width: 640px; }
+  .contact-list { display: grid; gap: 14px; max-width: 640px; }
   .contact-row {
-    display: flex; align-items: center; gap: 14px; padding: 16px 20px;
-    border: var(--border); border-radius: 12px; background: #fff; text-decoration: none; color: var(--text);
-    transition: border-color 0.15s;
+    display: flex; align-items: center; gap: 16px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 22px; text-decoration: none; transition: border-color 0.15s;
   }
-  .contact-row:hover { border-color: var(--blue); }
-  .contact-row .ico { font-size: 18px; width: 28px; text-align: center; }
-  .contact-row .lbl { font-size: 13px; font-weight: 500; color: var(--text-3); }
-  .contact-row .val { font-size: 15px; font-weight: 600; }
+  .contact-row:hover { border-color: var(--violet); }
+  .contact-row .ico { font-family: var(--mono); color: var(--amber); font-size: 15px; }
+  .contact-row .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--steel); }
+  .contact-row .val { font-size: 16px; font-weight: 600; color: var(--bone); word-break: break-all; }
 
   /* Footer */
-  footer { border-top: var(--border); padding: 40px 0; text-align: center; color: var(--text-3); font-size: 14px; }
-  footer a { color: var(--blue); text-decoration: none; }
+  footer { border-top: 1px solid var(--line); padding: 44px 0; }
+  footer .container {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+    font-family: var(--mono); font-size: 12.5px; color: var(--steel);
+  }
+  footer a { color: var(--bone-dim); text-decoration: none; }
+  footer a:hover { color: var(--amber); }
 
-  @media (max-width: 600px) {
-    .hero { padding: 64px 0 40px; }
-    section { padding: 56px 0; }
+  @media (max-width: 640px) {
+    section { padding: 64px 0; }
+    header { padding: 120px 0 30px; min-height: 84vh; }
   }
 </style>
 </head>
 <body>
 
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+<div id="scroll-progress" aria-hidden="true"></div>
+
+<div id="loader" aria-hidden="true">
+  <div class="words">
+    <span data-i18n="load1">Pulling <b>real data.</b></span>
+    <span data-i18n="load2">Fitting <b>spatial models.</b></span>
+    <span data-i18n="load3">Shipping <b>clear answers.</b></span>
+  </div>
+</div>
+
 <nav>
-  <div class="container">
-    <a class="brand" href="#top">Mahesh Pentu</a>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="#about" data-i18n="nav_about">About</a></li>
-        <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
-        <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
-        <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
-        <li><a href="#education" data-i18n="nav_education">Education</a></li>
-        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-      </ul>
-      <button class="lang-btn" id="lang-btn" onclick="toggleLang()" aria-label="Switch language">IT</button>
-      <a class="nav-cta" id="cv-link" href="cv/CV_Mahesh_Pentu_EN.docx" data-i18n="nav_cv">Download CV</a>
-    </div>
+  <a class="brand" href="#top"><b>M.</b> PENTU</a>
+  <div class="links">
+    <a href="#thesis" data-i18n="nav_thesis">Thesis</a>
+    <a class="hide-mobile" href="#work" data-i18n="nav_work">Projects</a>
+    <a href="https://www.linkedin.com/in/mahesh-pentu-6b48b632b" target="_blank" rel="noopener">LinkedIn</a>
+    <a id="cv-link" href="cv/CV_Mahesh_Pentu_EN.docx" download data-i18n="nav_cv">CV</a>
+    <button class="lang-btn" id="lang-btn" onclick="toggleLang()" aria-label="Switch language">IT</button>
+    <a class="btn-pill" href="#contact" data-i18n="nav_cta">Get in touch</a>
   </div>
 </nav>
 
-<header class="hero" id="top">
-  <div class="hero-dots"></div>
+<header id="top">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <span class="hero-badge" data-i18n="hero_badge">BSc Data Analysis · 80/100 · Vanvitelli University, Caserta</span>
-        <h1><span data-i18n="hero_p1">Turning messy data</span><br><span data-i18n="hero_p3">into</span> <span class="accent" data-i18n="hero_p2">clear decisions.</span></h1>
-        <p class="subtitle" data-i18n="hero_sub">Junior Data Analyst — BI &amp; Reporting · Data Quality</p>
-        <p class="lead" data-i18n="hero_lead">Data Analysis graduate with hands-on experience in data quality control, data entry supervision and reporting. I catch the errors everyone else misses — then I turn the cleaned data into answers. Trilingual, detail-obsessed, based in Caserta, Italy and fully available to relocate across Italy and the EU.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projects" data-i18n="hero_btn1">See my projects</a>
-          <a class="btn btn-ghost" href="#contact" data-i18n="hero_btn2">Get in touch</a>
-        </div>
-        <div class="hero-meta" data-i18n="hero_meta">Caserta, Italy · Driving licence A+B · Open to junior roles, BI support &amp; internships</div>
-      </div>
-      <div class="hero-photo-wrap">
-        <div class="hero-photo">
-          <img src="hero.jpg" alt="Mahesh Pentu">
-        </div>
-        <div class="chip chip-1" data-i18n-html="chip1_html"><b>+44%</b> coastal premium overestimated</div>
-        <div class="chip chip-2" data-i18n-html="chip2_html">487 <b>transactions</b> · 1 thesis</div>
-        <svg class="hero-spark" viewBox="0 0 240 72" fill="none" aria-hidden="true">
-          <path d="M0 58 C18 55, 28 62, 46 52 S 74 28, 92 40 S 120 18, 138 30 S 176 8, 196 18 S 228 6, 240 10"
-                stroke="#0075de" stroke-width="2.5" stroke-linecap="round" pathLength="1"/>
-          <circle cx="240" cy="10" r="3.5" fill="#0075de"/>
-        </svg>
-      </div>
+    <div class="hero-center">
+      <span class="hero-badge" data-i18n="hero_badge">BSc Data Analysis · 80/100 · Vanvitelli University, Caserta</span>
+      <h1 class="hero-name">
+        <span class="row"><i>Mahesh</i></span>
+        <span class="row"><i>Pentu</i></span>
+        <span class="sr-only" data-i18n="hero_sub">Junior Data Analyst — BI &amp; Reporting · Data Quality</span>
+      </h1>
+      <img class="hero-avatar" src="hero.jpg" alt="Mahesh Pentu">
+      <p class="hero-tag" data-i18n-html="hero_tag"><b>Junior Data Analyst</b> — spatial regression · BI &amp; reporting · data quality</p>
     </div>
   </div>
 </header>
 
-<section>
-  <div class="container">
-    <div class="metrics">
-      <div class="metric"><div class="num">80<span style="font-size:20px">/100</span></div><div class="lbl" data-i18n="m1">BSc Data Analysis grade</div></div>
-      <div class="metric"><div class="num">1+<span style="font-size:20px"> yr</span></div><div class="lbl" data-i18n="m2">Data supervision &amp; QA experience</div></div>
-      <div class="metric"><div class="num">3</div><div class="lbl" data-i18n="m3">Languages: Telugu · Italian · English</div></div>
-      <div class="metric"><div class="num">487</div><div class="lbl" data-i18n="m4">Transactions analysed in my thesis</div></div>
-    </div>
-  </div>
-</section>
+<main>
 
-<section class="alt" id="about">
-  <div class="container">
-    <div class="section-label" data-i18n="about_label">About</div>
-    <h2 class="section-title" data-i18n="about_title">The person behind the pivot tables</h2>
-    <p class="section-intro" data-i18n-html="about_intro">I graduated in Data Analysis from Università della Campania "Luigi Vanvitelli" (July 2026) with 80/100, after proving myself in professional data work. My edge: I've been on the operational side of data — supervising teams, cleaning and verifying large datasets, building reports that people actually use. I know the difference between data that looks right and data that <em>is</em> right.</p>
-    <div class="grid grid-2">
-      <div class="card">
-        <h3 data-i18n="about_c1t">What I bring</h3>
-        <p data-i18n="about_c1p">Advanced Excel (formulas, pivot tables, filters), a strict eye for data quality, structured reporting, and the statistical grounding from my degree — spatial regression, statistics, relational databases.</p>
-      </div>
-      <div class="card">
-        <h3 data-i18n="about_c2t">What I want</h3>
-        <p data-i18n="about_c2p">A first role as Junior Data Analyst, BI support or data-driven operational position — full-time, fixed-term or internship. I'm ready to start immediately and move anywhere in Italy or the EU.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="container">
-    <div class="section-label" data-i18n="skills_label">Skills</div>
-    <h2 class="section-title" data-i18n="skills_title">Tools I work with</h2>
-    <p class="section-intro" data-i18n="skills_intro">Built through coursework, professional experience, and real personal projects.</p>
-    <div class="grid grid-3">
-      <div class="card skill-card">
-        <h4 data-i18n="sk1_t">📊 Data &amp; Analysis</h4>
-        <div class="pill-row">
-          <span class="pill" data-i18n="sk1_a">Excel (advanced)</span>
-          <span class="pill" data-i18n="sk1_b">Pivot tables</span>
-          <span class="pill" data-i18n="sk1_c">Data cleaning</span>
-          <span class="pill" data-i18n="sk1_d">Statistics</span>
-          <span class="pill" data-i18n="sk1_e">Spatial regression</span>
-          <span class="pill" data-i18n="sk1_f">Reporting</span>
+  <section id="about">
+    <div class="container">
+      <p class="sec-label"><b>01</b><span data-i18n="sec_about">About</span></p>
+      <h2 data-i18n-html="about_title">The person behind <em>the pivot tables</em></h2>
+      <p class="sec-intro" data-i18n-html="about_intro">I graduated in Data Analysis from Università della Campania "Luigi Vanvitelli" (July 2026) with 80/100, after proving myself in professional data work. My edge: I've been on the operational side of data — supervising teams, cleaning and verifying large datasets, building reports that people actually use. I know the difference between data that looks right and data that <em>is</em> right.</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 data-i18n="about_c1t">What I bring</h3>
+          <p data-i18n="about_c1p">Advanced Excel (formulas, pivot tables, filters), a strict eye for data quality, structured reporting, and the statistical grounding from my degree — spatial regression, statistics, relational databases.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="about_c2t">What I want</h3>
+          <p data-i18n="about_c2p">A first role as Junior Data Analyst, BI support or data-driven operational position — full-time, fixed-term or internship. I'm ready to start immediately and move anywhere in Italy or the EU.</p>
         </div>
       </div>
-      <div class="card skill-card">
-        <h4 data-i18n="sk2_t">💻 Technical</h4>
-        <div class="pill-row">
-          <span class="pill" data-i18n="sk2_a">SQL (basics)</span>
-          <span class="pill" data-i18n="sk2_b">Python (project work)</span>
-          <span class="pill" data-i18n="sk2_c">MS Office</span>
-          <span class="pill" data-i18n="sk2_d">Access</span>
-          <span class="pill" data-i18n="sk2_e">PowerPoint</span>
-        </div>
+      <div class="stats">
+        <div class="stat"><div class="num"><span>80</span>/100</div><div class="lbl" data-i18n="m1">BSc Data Analysis grade</div></div>
+        <div class="stat"><div class="num"><span>36</span></div><div class="lbl" data-i18n="m2">Municipalities modelled</div></div>
+        <div class="stat"><div class="num"><span>3</span></div><div class="lbl" data-i18n="m3">Languages</div></div>
+        <div class="stat"><div class="num"><span>6</span></div><div class="lbl" data-i18n="m4">Spatial models compared</div></div>
       </div>
-      <div class="card skill-card">
-        <h4 data-i18n="sk3_t">🧠 Professional</h4>
-        <div class="pill-row">
-          <span class="pill" data-i18n="sk3_a">Data quality assurance</span>
-          <span class="pill" data-i18n="sk3_b">Data verification</span>
-          <span class="pill" data-i18n="sk3_c">Team supervision</span>
-          <span class="pill" data-i18n="sk3_d">Attention to detail</span>
-          <span class="pill" data-i18n="sk3_e">Trilingual communication</span>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <p class="sec-label"><b>02</b><span data-i18n="sec_skills">Skills</span></p>
+      <h2 data-i18n-html="skills_title">Tools I <em>work with</em></h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3 data-i18n="sk1_t">Data &amp; Analysis</h3>
+          <div class="pill-row">
+            <span class="pill" data-i18n="sk1_a">Excel (advanced)</span>
+            <span class="pill" data-i18n="sk1_b">Pivot tables</span>
+            <span class="pill" data-i18n="sk1_c">Data cleaning</span>
+            <span class="pill" data-i18n="sk1_d">Statistics</span>
+            <span class="pill" data-i18n="sk1_e">Spatial regression</span>
+            <span class="pill" data-i18n="sk1_f">Reporting</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="sk2_t">Technical</h3>
+          <div class="pill-row">
+            <span class="pill" data-i18n="sk2_a">SQL (basics)</span>
+            <span class="pill" data-i18n="sk2_b">Python (project work)</span>
+            <span class="pill" data-i18n="sk2_c">MS Office</span>
+            <span class="pill" data-i18n="sk2_d">Access</span>
+            <span class="pill" data-i18n="sk2_e">PowerPoint</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="sk3_t">Professional</h3>
+          <div class="pill-row">
+            <span class="pill" data-i18n="sk3_a">Data quality assurance</span>
+            <span class="pill" data-i18n="sk3_b">Data verification</span>
+            <span class="pill" data-i18n="sk3_c">Team supervision</span>
+            <span class="pill" data-i18n="sk3_d">Attention to detail</span>
+            <span class="pill" data-i18n="sk3_e">Trilingual communication</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="alt" id="experience">
-  <div class="container">
-    <div class="section-label" data-i18n="exp_label">Experience</div>
-    <h2 class="section-title" data-i18n="exp_title">Where I've proven it</h2>
-    <div class="grid grid-2">
-      <div class="card">
-        <div class="role" data-i18n="exp1_role">Data Entry Supervisor</div>
-        <h3>RK IT Solutions</h3>
-        <div class="dates">Hyderabad, India · 2021 – 2022</div>
-        <p data-i18n="exp1_p">Supervised a data entry team; performed data quality control, verification and cleaning of large datasets; prepared status reports; ensured accuracy and consistency of processed information.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="container">
-    <div class="section-label" data-i18n="proj_label">Projects</div>
-    <h2 class="section-title" data-i18n="proj_title">Things I've actually built</h2>
-    <p class="section-intro" data-i18n="proj_intro">Real work, real data — not tutorial copies.</p>
-    <div class="grid grid-2">
-      <div class="card">
-        <h3 data-i18n="p1_t">Spatial Regression on Campania Housing Prices</h3>
-        <div class="dates" data-i18n="p1_d">Bachelor thesis · Università della Campania "Luigi Vanvitelli" · 2026</div>
-        <p data-i18n-html="p1_p">Analysed 487 real estate transactions across Campania to measure how location truly drives price. When spatial effects are modelled properly, the famous "coastal premium" turns out to be <strong>overestimated by ~44%</strong> — a result that surprised even my supervisors.</p>
-        <div class="tags"><span class="tag" data-i18n="p1_t1">Spatial regression</span><span class="tag" data-i18n="p1_t2">Statistics</span><span class="tag" data-i18n="p1_t3">Geospatial analysis</span><span class="tag" data-i18n="p1_t4">487 transactions</span></div>
-      </div>
-      <div class="card">
-        <h3 data-i18n="p2_t">Autonomous Crypto Trading Research System</h3>
-        <div class="dates" data-i18n="p2_d">Personal project · Python · 2026</div>
-        <p data-i18n="p2_p">Built a complete backtesting and paper-trading system: pulled 8 years of real market data, stress-tested trend-following strategies across bull and bear markets, and deployed an autonomous paper-trading bot that trades and reports daily. The system is designed to survive crashes, not chase them.</p>
-        <div class="tags"><span class="tag" data-i18n="p2_t1">Python</span><span class="tag" data-i18n="p2_t2">Data analysis</span><span class="tag" data-i18n="p2_t3">Backtesting</span><span class="tag" data-i18n="p2_t4">Automation</span></div>
-      </div>
-      <div class="card">
-        <h3 data-i18n="p3_t">Automated Data Pipeline — Web Scraping &amp; Outreach</h3>
-        <div class="dates" data-i18n="p3_d">Personal project · Python · 2026</div>
-        <p data-i18n="p3_p">Designed and ran an automated pipeline that harvested and verified ~180 real business contacts from company websites (with deduplication and validation), then sent tailored outreach with automatic cooldown management and response detection. Scraping, API work, and process automation end to end.</p>
-        <div class="tags"><span class="tag" data-i18n="p3_t1">Web scraping</span><span class="tag" data-i18n="p3_t2">APIs</span><span class="tag" data-i18n="p3_t3">Automation</span><span class="tag" data-i18n="p3_t4">Data validation</span></div>
-      </div>
-      <div class="card">
-        <h3 data-i18n="p4_t">Data Quality &amp; Verification Workflows</h3>
-        <div class="dates">RK IT Solutions · 2021 – 2022</div>
-        <p data-i18n="p4_p">Designed the verification workflow for a large-scale data entry operation: double-check rules, error tracking, and weekly accuracy reports that reduced rework and kept the team accountable with numbers.</p>
-        <div class="tags"><span class="tag" data-i18n="p4_t1">Excel</span><span class="tag" data-i18n="p4_t2">Data quality</span><span class="tag" data-i18n="p4_t3">Process design</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="alt" id="education">
-  <div class="container">
-    <div class="section-label" data-i18n="edu_label">Education</div>
-    <h2 class="section-title" data-i18n="edu_title">Education &amp; languages</h2>
-    <div class="grid grid-2">
-      <div class="card edu-row">
-        <h3 data-i18n="edu1_t">BSc Data Analysis — 80/100</h3>
-        <div class="sub" data-i18n="edu1_s">Università della Campania "Luigi Vanvitelli", Caserta · Graduated July 2026</div>
-        <p data-i18n="edu1_p">Coursework: statistics, data analysis, relational database fundamentals, data quality and reporting. Thesis on spatial regression supervised by Prof. Verde and Prof. Balzanella.</p>
-      </div>
-      <div class="card">
-        <h3 data-i18n="edu2_t">Languages</h3>
-        <div class="pill-row" style="margin-top:14px">
-          <span class="pill" data-i18n="edu2_a">Telugu — native</span>
-          <span class="pill" data-i18n="edu2_b">Italian — professional</span>
-          <span class="pill" data-i18n="edu2_c">English — professional</span>
+  <section id="thesis">
+    <div class="container">
+      <p class="sec-label"><b>03</b><span data-i18n="sec_thesis">Thesis</span></p>
+      <h2 data-i18n-html="th_t">Spatial regression on Campania's <em>urban heat island</em></h2>
+      <p class="sec-intro">
+        <span class="mono" style="color:var(--amber);font-size:13px" data-i18n="th_sub">Bachelor thesis · Università della Campania "Luigi Vanvitelli" · 2026</span><br>
+        <span class="mono" style="color:var(--steel);font-size:12.5px" data-i18n="th_sup">Supervisors: Prof. Rosanna Verde &amp; Prof. Antonio Balzanella</span>
+      </p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 data-i18n="th_c1t">What I built</h3>
+          <p data-i18n-html="th_c1p">A complete from-global-to-local spatial analysis of summer land surface temperature across <strong>36 Campania municipalities</strong>: OLS with full diagnostics (VIF, Breusch-Pagan, Jarque-Bera, Durbin-Watson), global and local autocorrelation (<strong>Moran's I, LISA, Getis-Ord Gi*</strong>), maximum-likelihood spatial models (<strong>SAR, SEM, SDM</strong> with effect decomposition) and local regression (<strong>GWR, MGWR</strong>) — all compared on R², AIC/BIC and leave-one-out error.</p>
         </div>
-        <div style="margin-top:20px"><h3 style="font-size:18px" data-i18n="edu3_t">Availability</h3>
-        <p style="margin-top:6px" data-i18n="edu3_p">Based in Caserta, Italy. Student residence permit in conversion to job-seeker permit. Fully available to relocate across Italy and the EU. Driving licence A+B.</p></div>
+        <div class="card">
+          <h3 data-i18n="th_c2t">What I found</h3>
+          <p data-i18n-html="th_c2p">Elevation dominates: <strong>≈ −0.41 °C per 100 m</strong> and R² ≈ 0.75. Summer heat clusters along the Naples–Salerno coastal corridor (Moran's I ≈ 0.28, p ≈ 0.004) against the cool Avellino–Benevento interior. The pipeline is fully reproducible — from real open sources (Landsat, Copernicus DEM, ERA5-Land, ISTAT/GISCO) with no geopandas or PySAL.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <p class="mono" style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--steel);margin-bottom:10px" data-i18n="th_note_lbl">Honest note</p>
+        <p style="font-size:14.5px" data-i18n="th_note">Results in the submitted version are produced on a synthetic sample dataset to demonstrate the end-to-end workflow; final figures are regenerated from the real open-data sources before final submission (thesis §3.17). The pipeline, code and sample dataset are all attached below — inspect them yourself.</p>
+      </div>
+      <p class="mono" style="margin-top:36px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--steel)" data-i18n="th_dl">Research artifacts — download everything</p>
+      <div class="artifacts">
+        <a class="artifact" href="docs/Thesis_Spatial_Regression_Campania.pdf" download>
+          <span class="ext">PDF</span>
+          <span class="name" data-i18n="th_pdf">Full thesis (65 pp.)</span>
+          <span class="meta">2.4 MB</span>
+        </a>
+        <a class="artifact" href="docs/Thesis_Defense_Presentation.pptx" download>
+          <span class="ext">PPTX</span>
+          <span class="name" data-i18n="th_ppt">Defense presentation</span>
+          <span class="meta">20 slides</span>
+        </a>
+        <a class="artifact" href="docs/campania_spatial_lite.py" download>
+          <span class="ext">PY</span>
+          <span class="name" data-i18n="th_py">Reproducible pipeline</span>
+          <span class="meta">NASA POWER · first principles</span>
+        </a>
+        <a class="artifact" href="docs/campania_spatial_dataset_SAMPLE.xlsx" download>
+          <span class="ext">XLSX</span>
+          <span class="name" data-i18n="th_xlsx">Sample dataset</span>
+          <span class="meta">36 comuni · 16 cols · 2023–25</span>
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="contact">
-  <div class="container">
-    <div class="section-label" data-i18n="ct_label">Contact</div>
-    <h2 class="section-title" data-i18n="ct_title">Let's talk data</h2>
-    <p class="section-intro" data-i18n="ct_intro">I reply fast, I'm ready to start, and I'll bring the same attention to detail I apply to data.</p>
-    <div class="contact-list">
-      <a class="contact-row" href="mailto:pentu.mahesh0104@gmail.com">
-        <span class="ico">✉️</span>
-        <div><div class="lbl" data-i18n="ct_email">Email</div><div class="val">pentu.mahesh0104@gmail.com</div></div>
-      </a>
-      <a class="contact-row" href="https://www.linkedin.com/in/mahesh-pentu-6b48b632b" target="_blank" rel="noopener">
-        <span class="ico">💼</span>
-        <div><div class="lbl" data-i18n="ct_li">LinkedIn</div><div class="val">linkedin.com/in/mahesh-pentu-6b48b632b</div></div>
-      </a>
-      <a class="contact-row" id="cv-link2" href="cv/CV_Mahesh_Pentu_EN.docx">
-        <span class="ico">📄</span>
-        <div><div class="lbl" data-i18n="ct_cv">Curriculum</div><div class="val" data-i18n="ct_cvv">Download CV (English) — Italian version also available</div></div>
-      </a>
+  <section id="work">
+    <div class="container">
+      <p class="sec-label"><b>04</b><span data-i18n="sec_work">Projects</span></p>
+      <h2 data-i18n-html="work_title">Things I've <em>actually built</em></h2>
+      <p class="sec-intro" data-i18n="work_intro">Real work, real data — not tutorial copies.</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 data-i18n="p2_t">Autonomous Crypto Trading Research System</h3>
+          <div class="dates" data-i18n="p2_d">Personal project · Python · 2026</div>
+          <p data-i18n="p2_p">Built a complete backtesting and paper-trading system: pulled 8 years of real market data, stress-tested trend-following strategies across bull and bear markets, and deployed an autonomous paper-trading bot that trades and reports daily. The system is designed to survive crashes, not chase them.</p>
+          <div class="pill-row"><span class="pill" data-i18n="p2_t1">Python</span><span class="pill" data-i18n="p2_t2">Data analysis</span><span class="pill" data-i18n="p2_t3">Backtesting</span><span class="pill" data-i18n="p2_t4">Automation</span></div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="p3_t">Automated Data Pipeline — Web Scraping &amp; Outreach</h3>
+          <div class="dates" data-i18n="p3_d">Personal project · Python · 2026</div>
+          <p data-i18n="p3_p">Designed and ran an automated pipeline that harvested and verified ~180 real business contacts from company websites (with deduplication and validation), then sent tailored outreach with automatic cooldown management and response detection. Scraping, API work, and process automation end to end.</p>
+          <div class="pill-row"><span class="pill" data-i18n="p3_t1">Web scraping</span><span class="pill" data-i18n="p3_t2">APIs</span><span class="pill" data-i18n="p3_t3">Automation</span><span class="pill" data-i18n="p3_t4">Data validation</span></div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="p4_t">Data Quality &amp; Verification Workflows</h3>
+          <div class="dates">RK IT Solutions · 2021 – 2022</div>
+          <p data-i18n="p4_p">Designed the verification workflow for a large-scale data entry operation: double-check rules, error tracking, and weekly accuracy reports that reduced rework and kept the team accountable with numbers.</p>
+          <div class="pill-row"><span class="pill" data-i18n="p4_t1">Excel</span><span class="pill" data-i18n="p4_t2">Data quality</span><span class="pill" data-i18n="p4_t3">Process design</span></div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="p5_t">Bilingual Portfolio — this site</h3>
+          <div class="dates" data-i18n="p5_d">Personal project · HTML/CSS/JS · 2026</div>
+          <p data-i18n="p5_p">Designed and deployed this site: automatic EN/IT language detection, GSAP motion, and a fully static GitHub Pages build with every artifact downloadable. No frameworks — just clean code, the way a data analyst would ship it.</p>
+          <div class="pill-row"><span class="pill" data-i18n="p5_t1">HTML/CSS/JS</span><span class="pill" data-i18n="p5_t2">GSAP</span><span class="pill" data-i18n="p5_t3">GitHub Pages</span><span class="pill" data-i18n="p5_t4">i18n</span></div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section id="path">
+    <div class="container">
+      <p class="sec-label"><b>05</b><span data-i18n="sec_path">Path</span></p>
+      <h2 data-i18n-html="path_title">Education, experience <em>&amp; more</em></h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="role" data-i18n="edu1_role">Education</div>
+          <h3 data-i18n="edu1_t">BSc Data Analysis — 80/100</h3>
+          <div class="dates" data-i18n="edu1_s">Università della Campania "Luigi Vanvitelli", Caserta · Graduated July 2026</div>
+          <p data-i18n="edu1_p">Coursework: statistics, data analysis, relational database fundamentals, data quality and reporting. Thesis on spatial regression supervised by Prof. Verde and Prof. Balzanella.</p>
+        </div>
+        <div class="card">
+          <div class="role" data-i18n="exp1_role">Experience</div>
+          <h3>RK IT Solutions</h3>
+          <div class="dates">Hyderabad, India · 2021 – 2022</div>
+          <p data-i18n="exp1_p">Supervised a data entry team; performed data quality control, verification and cleaning of large datasets; prepared status reports; ensured accuracy and consistency of processed information.</p>
+        </div>
+        <div class="card">
+          <div class="role" data-i18n="edu2_role">Languages</div>
+          <h3 data-i18n="edu2_t">Trilingual</h3>
+          <div class="pill-row">
+            <span class="pill" data-i18n="edu2_a">Telugu — native</span>
+            <span class="pill" data-i18n="edu2_b">Italian — professional</span>
+            <span class="pill" data-i18n="edu2_c">English — professional</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="role" data-i18n="edu3_role">Availability</div>
+          <h3 data-i18n="edu3_t">Ready to move</h3>
+          <p style="margin-top:10px" data-i18n="edu3_p">Based in Caserta, Italy. Student residence permit in conversion to job-seeker permit. Fully available to relocate across Italy and the EU. Driving licence A+B.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <p class="sec-label"><b>06</b><span data-i18n="sec_contact">Contact</span></p>
+      <h2 data-i18n-html="ct_title">Let's talk <em>data</em></h2>
+      <p class="sec-intro" data-i18n="ct_intro">I reply fast, I'm ready to start, and I'll bring the same attention to detail I apply to data.</p>
+      <div class="contact-list">
+        <a class="contact-row" href="mailto:pentu.mahesh0104@gmail.com">
+          <span class="ico">✉</span>
+          <div><div class="lbl" data-i18n="ct_email">Email</div><div class="val">pentu.mahesh0104@gmail.com</div></div>
+        </a>
+        <a class="contact-row" href="https://www.linkedin.com/in/mahesh-pentu-6b48b632b" target="_blank" rel="noopener">
+          <span class="ico">▣</span>
+          <div><div class="lbl" data-i18n="ct_li">LinkedIn</div><div class="val">linkedin.com/in/mahesh-pentu-6b48b632b</div></div>
+        </a>
+        <a class="contact-row" id="cv-link2" href="cv/CV_Mahesh_Pentu_EN.docx" download>
+          <span class="ico">▤</span>
+          <div><div class="lbl" data-i18n="ct_cv">Curriculum</div><div class="val" data-i18n="ct_cvv">Download CV — English · Italiano</div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  <div class="container" data-i18n="footer">© 2026 Mahesh Pentu · Caserta, Italy · Built with data and care</div>
+  <div class="container">
+    <span data-i18n="footer">© 2026 Mahesh Pentu · Caserta, Italy · built with data and care</span>
+    <span><a href="#top">↑ back to top</a></span>
+  </div>
 </footer>
 
 <script>
 var I18N = {
-  nav_about:    {en:"About", it:"Chi sono"},
-  nav_skills:   {en:"Skills", it:"Competenze"},
-  nav_experience:{en:"Experience", it:"Esperienza"},
-  nav_projects: {en:"Projects", it:"Progetti"},
-  nav_education:{en:"Education", it:"Formazione"},
-  nav_contact:  {en:"Contact", it:"Contatti"},
-  nav_cv:       {en:"Download CV", it:"Scarica CV"},
+  load1:        {en:"Pulling <b>real data.</b>", it:"Scarico <b>dati reali.</b>"},
+  load2:        {en:"Fitting <b>spatial models.</b>", it:"Stimo <b>modelli spaziali.</b>"},
+  load3:        {en:"Shipping <b>clear answers.</b>", it:"Consegno <b>risposte chiare.</b>"},
+  nav_thesis:   {en:"Thesis", it:"Tesi"},
+  nav_work:     {en:"Projects", it:"Progetti"},
+  nav_cv:       {en:"CV", it:"CV"},
+  nav_cta:      {en:"Get in touch", it:"Contattami"},
   hero_badge:   {en:"BSc Data Analysis · 80/100 · Vanvitelli University, Caserta", it:"Laurea in Data Analysis · 80/100 · Università Vanvitelli, Caserta"},
-  hero_p1:      {en:"Turning messy data", it:"Trasformo dati disordinati"},
-  hero_p3:      {en:"into", it:"in"},
-  hero_p2:      {en:"clear decisions.", it:"decisioni chiare."},
   hero_sub:     {en:"Junior Data Analyst — BI & Reporting · Data Quality", it:"Junior Data Analyst — BI e Reporting · Data Quality"},
-  hero_lead:    {en:"Data Analysis graduate with hands-on experience in data quality control, data entry supervision and reporting. I catch the errors everyone else misses — then I turn the cleaned data into answers. Trilingual, detail-obsessed, based in Caserta, Italy and fully available to relocate across Italy and the EU.", it:"Laureato in Data Analysis con esperienza concreta nel controllo qualità dei dati, nella supervisione di data entry e nel reporting. Colgo gli errori che nessun altro vede — poi trasformo i dati puliti in risposte. Trilingue, attento ai dettagli, residente a Caserta e pienamente disponibile a trasferimenti in Italia e in Europa."},
-  hero_btn1:    {en:"See my projects", it:"Vedi i miei progetti"},
-  hero_btn2:    {en:"Get in touch", it:"Contattami"},
-  hero_meta:    {en:"Caserta, Italy · Driving licence A+B · Open to junior roles, BI support & internships", it:"Caserta, Italia · Patente A+B · Disponibile a ruoli junior, supporto BI e tirocini"},
-  chip1_html:   {en:"<b>+44%</b> coastal premium overestimated", it:"<b>+44%</b> premio costiero sovrastimato"},
-  chip2_html:   {en:"487 <b>transactions</b> · 1 thesis", it:"487 <b>transazioni</b> · 1 tesi"},
-  m1:           {en:"BSc Data Analysis grade", it:"Voto di laurea in Data Analysis"},
-  m2:           {en:"Data supervision & QA experience", it:"Esperienza in supervisione dati e QA"},
-  m3:           {en:"Languages: Telugu · Italian · English", it:"Lingue: Telugu · Italiano · Inglese"},
-  m4:           {en:"Transactions analysed in my thesis", it:"Transazioni analizzate nella tesi"},
-  about_label:  {en:"About", it:"Chi sono"},
-  about_title:  {en:"The person behind the pivot tables", it:"La persona dietro le tabelle pivot"},
+  hero_tag:     {en:"<b>Junior Data Analyst</b> — spatial regression · BI & reporting · data quality", it:"<b>Junior Data Analyst</b> — regressione spaziale · BI e reporting · data quality"},
+  sec_about:    {en:"About", it:"Chi sono"},
+  sec_skills:   {en:"Skills", it:"Competenze"},
+  sec_thesis:   {en:"Thesis", it:"Tesi"},
+  sec_work:     {en:"Projects", it:"Progetti"},
+  sec_path:     {en:"Path", it:"Percorso"},
+  sec_contact:  {en:"Contact", it:"Contatti"},
+  about_title:  {en:"The person behind <em>the pivot tables</em>", it:"La persona dietro <em>le tabelle pivot</em>"},
   about_intro:  {en:"I graduated in Data Analysis from Università della Campania \"Luigi Vanvitelli\" (July 2026) with 80/100, after proving myself in professional data work. My edge: I've been on the operational side of data — supervising teams, cleaning and verifying large datasets, building reports that people actually use. I know the difference between data that looks right and data that <em>is</em> right.", it:"Mi sono laureato in Data Analysis all'Università della Campania \"Luigi Vanvitelli\" (luglio 2026) con 80/100, dopo essermi formato nel lavoro con i dati. Il mio punto di forza: sono stato dalla parte operativa dei dati — supervisionando team, pulendo e verificando grandi set di dati, costruendo report che le persone usano davvero. Conosco la differenza tra dati che sembrano giusti e dati che <em>lo sono</em>."},
   about_c1t:    {en:"What I bring", it:"Cosa porto"},
   about_c1p:    {en:"Advanced Excel (formulas, pivot tables, filters), a strict eye for data quality, structured reporting, and the statistical grounding from my degree — spatial regression, statistics, relational databases.", it:"Excel avanzato (formule, tabelle pivot, filtri), occhio attento alla qualità dei dati, reporting strutturato e solide basi statistiche dalla laurea — regressione spaziale, statistica, basi di dati relazionali."},
   about_c2t:    {en:"What I want", it:"Cosa cerco"},
   about_c2p:    {en:"A first role as Junior Data Analyst, BI support or data-driven operational position — full-time, fixed-term or internship. I'm ready to start immediately and move anywhere in Italy or the EU.", it:"Un primo ruolo come Junior Data Analyst, supporto BI o posizione operativa data-driven — full-time, a tempo determinato o tirocinio. Pronto a iniziare subito e a trasferirmi in qualsiasi città d'Italia o d'Europa."},
-  skills_label: {en:"Skills", it:"Competenze"},
-  skills_title: {en:"Tools I work with", it:"Gli strumenti che uso"},
-  skills_intro: {en:"Built through coursework, professional experience, and real personal projects.", it:"Costruite attraverso gli studi, l'esperienza professionale e progetti personali reali."},
-  sk1_t:        {en:"📊 Data & Analysis", it:"📊 Dati e Analisi"},
+  m1:           {en:"BSc Data Analysis grade", it:"Voto di laurea in Data Analysis"},
+  m2:           {en:"Municipalities modelled", it:"Comuni modellati"},
+  m3:           {en:"Languages", it:"Lingue"},
+  m4:           {en:"Spatial models compared", it:"Modelli spaziali confrontati"},
+  skills_title: {en:"Tools I <em>work with</em>", it:"Gli strumenti <em>che uso</em>"},
+  sk1_t:        {en:"Data & Analysis", it:"Dati e Analisi"},
   sk1_a:        {en:"Excel (advanced)", it:"Excel (avanzato)"},
   sk1_b:        {en:"Pivot tables", it:"Tabelle pivot"},
   sk1_c:        {en:"Data cleaning", it:"Pulizia dati"},
   sk1_d:        {en:"Statistics", it:"Statistica"},
   sk1_e:        {en:"Spatial regression", it:"Regressione spaziale"},
   sk1_f:        {en:"Reporting", it:"Reporting"},
-  sk2_t:        {en:"💻 Technical", it:"💻 Tecnico"},
+  sk2_t:        {en:"Technical", it:"Tecnico"},
   sk2_a:        {en:"SQL (basics)", it:"SQL (basi)"},
   sk2_b:        {en:"Python (project work)", it:"Python (progetti)"},
   sk2_c:        {en:"MS Office", it:"MS Office"},
   sk2_d:        {en:"Access", it:"Access"},
   sk2_e:        {en:"PowerPoint", it:"PowerPoint"},
-  sk3_t:        {en:"🧠 Professional", it:"🧠 Professionali"},
+  sk3_t:        {en:"Professional", it:"Professionali"},
   sk3_a:        {en:"Data quality assurance", it:"Garanzia qualità dati"},
   sk3_b:        {en:"Data verification", it:"Verifica dati"},
   sk3_c:        {en:"Team supervision", it:"Supervisione team"},
   sk3_d:        {en:"Attention to detail", it:"Attenzione al dettaglio"},
   sk3_e:        {en:"Trilingual communication", it:"Comunicazione trilingue"},
-  exp_label:    {en:"Experience", it:"Esperienza"},
-  exp_title:    {en:"Where I've proven it", it:"Dove l'ho dimostrato"},
-  exp1_role:    {en:"Data Entry Supervisor", it:"Supervisore Data Entry"},
-  exp1_p:       {en:"Supervised a data entry team; performed data quality control, verification and cleaning of large datasets; prepared status reports; ensured accuracy and consistency of processed information.", it:"Supervisione di un team di data entry; controllo qualità, verifica e pulizia di grandi set di dati; preparazione di report di stato; garanzia di accuratezza e coerenza delle informazioni processate."},
-  proj_label:   {en:"Projects", it:"Progetti"},
-  proj_title:   {en:"Things I've actually built", it:"Cose che ho costruito davvero"},
-  proj_intro:   {en:"Real work, real data — not tutorial copies.", it:"Lavoro vero, dati veri — non copie da tutorial."},
-  p1_t:         {en:"Spatial Regression on Campania Housing Prices", it:"Regressione Spaziale sui Prezzi Immobiliari in Campania"},
-  p1_d:         {en:"Bachelor thesis · Università della Campania \"Luigi Vanvitelli\" · 2026", it:"Tesi di laurea · Università della Campania \"Luigi Vanvitelli\" · 2026"},
-  p1_p:         {en:"Analysed 487 real estate transactions across Campania to measure how location truly drives price. When spatial effects are modelled properly, the famous \"coastal premium\" turns out to be <strong>overestimated by ~44%</strong> — a result that surprised even my supervisors.", it:"Analizzate 487 transazioni immobiliari in Campania per misurare come la posizione influisce davvero sul prezzo. Quando gli effetti spaziali sono modellati correttamente, il famoso \"premio costiero\" risulta <strong>sovrastimato di circa il 44%</strong> — un risultato che ha sorpreso persino i miei relatori."},
-  p1_t1:        {en:"Spatial regression", it:"Regressione spaziale"},
-  p1_t2:        {en:"Statistics", it:"Statistica"},
-  p1_t3:        {en:"Geospatial analysis", it:"Analisi geospaziale"},
-  p1_t4:        {en:"487 transactions", it:"487 transazioni"},
+  th_t:         {en:"Spatial regression on Campania's <em>urban heat island</em>", it:"Regressione spaziale sull'<em>isola di calore</em> della Campania"},
+  th_sub:       {en:"Bachelor thesis · Università della Campania \"Luigi Vanvitelli\" · 2026", it:"Tesi di laurea · Università della Campania \"Luigi Vanvitelli\" · 2026"},
+  th_sup:       {en:"Supervisors: Prof. Rosanna Verde & Prof. Antonio Balzanella", it:"Relatori: Prof.ssa Rosanna Verde e Prof. Antonio Balzanella"},
+  th_c1t:       {en:"What I built", it:"Cosa ho costruito"},
+  th_c1p:       {en:"A complete from-global-to-local spatial analysis of summer land surface temperature across <strong>36 Campania municipalities</strong>: OLS with full diagnostics (VIF, Breusch-Pagan, Jarque-Bera, Durbin-Watson), global and local autocorrelation (<strong>Moran's I, LISA, Getis-Ord Gi*</strong>), maximum-likelihood spatial models (<strong>SAR, SEM, SDM</strong> with effect decomposition) and local regression (<strong>GWR, MGWR</strong>) — all compared on R², AIC/BIC and leave-one-out error.", it:"Un'analisi spaziale completa from-global-to-local della temperatura superficiale estiva su <strong>36 comuni campani</strong>: OLS con diagnostica completa (VIF, Breusch-Pagan, Jarque-Bera, Durbin-Watson), autocorrelazione spaziale globale e locale (<strong>Moran's I, LISA, Getis-Ord Gi*</strong>), modelli spaziali a massima verosimiglianza (<strong>SAR, SEM, SDM</strong> con scomposizione degli effetti) e regressione locale (<strong>GWR, MGWR</strong>) — confrontati su R², AIC/BIC ed errore leave-one-out."},
+  th_c2t:       {en:"What I found", it:"Cosa ho scoperto"},
+  th_c2p:       {en:"Elevation dominates: <strong>≈ −0.41 °C per 100 m</strong> and R² ≈ 0.75. Summer heat clusters along the Naples–Salerno coastal corridor (Moran's I ≈ 0.28, p ≈ 0.004) against the cool Avellino–Benevento interior. The pipeline is fully reproducible — from real open sources (Landsat, Copernicus DEM, ERA5-Land, ISTAT/GISCO) with no geopandas or PySAL.", it:"L'altitudine domina: <strong>≈ −0,41 °C ogni 100 m</strong> con R² ≈ 0,75. Il caldo estivo si concentra lungo il corridoio costiero Napoli–Salerno (Moran's I ≈ 0,28, p ≈ 0,004), con l'interno Avellino–Benevento più fresco. La pipeline è completamente riproducibile — da fonti aperte reali (Landsat, Copernicus DEM, ERA5-Land, ISTAT/GISCO) senza geopandas né PySAL."},
+  th_note_lbl:  {en:"Honest note", it:"Nota di trasparenza"},
+  th_note:      {en:"Results in the submitted version are produced on a synthetic sample dataset to demonstrate the end-to-end workflow; final figures are regenerated from the real open-data sources before final submission (thesis §3.17). The pipeline, code and sample dataset are all attached below — inspect them yourself.", it:"I risultati della versione presentata sono prodotti su un dataset campione sintetico per dimostrare il flusso di lavoro completo; le figure finali saranno rigenerate dalle fonti aperte reali prima della consegna definitiva (tesi §3.17). Pipeline, codice e dataset campione sono scaricabili qui sotto — verifica tu stesso."},
+  th_dl:        {en:"Research artifacts — download everything", it:"Materiali di ricerca — scarica tutto"},
+  th_pdf:       {en:"Full thesis (65 pp.)", it:"Tesi completa (65 pp.)"},
+  th_ppt:       {en:"Defense presentation", it:"Presentazione di tesi"},
+  th_py:        {en:"Reproducible pipeline", it:"Pipeline riproducibile"},
+  th_xlsx:      {en:"Sample dataset", it:"Dataset campione"},
+  work_title:   {en:"Things I've <em>actually built</em>", it:"Cose che ho <em>costruito davvero</em>"},
+  work_intro:   {en:"Real work, real data — not tutorial copies.", it:"Lavoro vero, dati veri — non copie da tutorial."},
   p2_t:         {en:"Autonomous Crypto Trading Research System", it:"Sistema Autonomo di Ricerca sul Trading Crypto"},
   p2_d:         {en:"Personal project · Python · 2026", it:"Progetto personale · Python · 2026"},
   p2_p:         {en:"Built a complete backtesting and paper-trading system: pulled 8 years of real market data, stress-tested trend-following strategies across bull and bear markets, and deployed an autonomous paper-trading bot that trades and reports daily. The system is designed to survive crashes, not chase them.", it:"Costruito un sistema completo di backtesting e paper trading: scaricati 8 anni di dati di mercato reali, stress-testate strategie di trend following in mercati rialzisti e ribassisti, e lanciato un bot autonomo di paper trading che opera e riporta ogni giorno. Il sistema è progettato per sopravvivere ai crolli, non per inseguirli."},
@@ -504,25 +552,35 @@ var I18N = {
   p4_t1:        {en:"Excel", it:"Excel"},
   p4_t2:        {en:"Data quality", it:"Qualità dati"},
   p4_t3:        {en:"Process design", it:"Progettazione processi"},
-  edu_label:    {en:"Education", it:"Formazione"},
-  edu_title:    {en:"Education & languages", it:"Formazione e lingue"},
+  p5_t:         {en:"Bilingual Portfolio — this site", it:"Portfolio bilingue — questo sito"},
+  p5_d:         {en:"Personal project · HTML/CSS/JS · 2026", it:"Progetto personale · HTML/CSS/JS · 2026"},
+  p5_p:         {en:"Designed and deployed this site: automatic EN/IT language detection, GSAP motion, and a fully static GitHub Pages build with every artifact downloadable. No frameworks — just clean code, the way a data analyst would ship it.", it:"Progettato e pubblicato questo sito: rilevamento automatico della lingua EN/IT, animazioni GSAP e build completamente statica su GitHub Pages con tutti i materiali scaricabili. Nessun framework — solo codice pulito, come lo consegnerebbe un data analyst."},
+  p5_t1:        {en:"HTML/CSS/JS", it:"HTML/CSS/JS"},
+  p5_t2:        {en:"GSAP", it:"GSAP"},
+  p5_t3:        {en:"GitHub Pages", it:"GitHub Pages"},
+  p5_t4:        {en:"i18n", it:"i18n"},
+  path_title:   {en:"Education, experience <em>&amp; more</em>", it:"Formazione, esperienza <em>e altro</em>"},
+  edu1_role:    {en:"Education", it:"Formazione"},
   edu1_t:       {en:"BSc Data Analysis — 80/100", it:"Laurea in Data Analysis — 80/100"},
   edu1_s:       {en:"Università della Campania \"Luigi Vanvitelli\", Caserta · Graduated July 2026", it:"Università della Campania \"Luigi Vanvitelli\", Caserta · Laureato luglio 2026"},
   edu1_p:       {en:"Coursework: statistics, data analysis, relational database fundamentals, data quality and reporting. Thesis on spatial regression supervised by Prof. Verde and Prof. Balzanella.", it:"Corsi: statistica, analisi dei dati, fondamenti di basi di dati relazionali, qualità dei dati e reporting. Tesi in regressione spaziale con i prof. Verde e Balzanella."},
-  edu2_t:       {en:"Languages", it:"Lingue"},
+  exp1_role:    {en:"Experience", it:"Esperienza"},
+  exp1_p:       {en:"Supervised a data entry team; performed data quality control, verification and cleaning of large datasets; prepared status reports; ensured accuracy and consistency of processed information.", it:"Supervisione di un team di data entry; controllo qualità, verifica e pulizia di grandi set di dati; preparazione di report di stato; garanzia di accuratezza e coerenza delle informazioni processate."},
+  edu2_role:    {en:"Languages", it:"Lingue"},
+  edu2_t:       {en:"Trilingual", it:"Trilingue"},
   edu2_a:       {en:"Telugu — native", it:"Telugu — madrelingua"},
   edu2_b:       {en:"Italian — professional", it:"Italiano — professionale"},
   edu2_c:       {en:"English — professional", it:"Inglese — professionale"},
-  edu3_t:       {en:"Availability", it:"Disponibilità"},
+  edu3_role:    {en:"Availability", it:"Disponibilità"},
+  edu3_t:       {en:"Ready to move", it:"Pronto a trasferirmi"},
   edu3_p:       {en:"Based in Caserta, Italy. Student residence permit in conversion to job-seeker permit. Fully available to relocate across Italy and the EU. Driving licence A+B.", it:"Residente a Caserta, Italia. Permesso di soggiorno per motivi di studio in conversione a permesso per attesa occupazione. Pienamente disponibile a trasferimenti in Italia e in Europa. Patente A+B."},
-  ct_label:     {en:"Contact", it:"Contatti"},
-  ct_title:     {en:"Let's talk data", it:"Parliamo di dati"},
+  ct_title:     {en:"Let's talk <em>data</em>", it:"Parliamo di <em>dati</em>"},
   ct_intro:     {en:"I reply fast, I'm ready to start, and I'll bring the same attention to detail I apply to data.", it:"Rispondo in fretta, sono pronto a iniziare e porto la stessa attenzione ai dettagli che metto nei dati."},
   ct_email:     {en:"Email", it:"Email"},
   ct_li:        {en:"LinkedIn", it:"LinkedIn"},
   ct_cv:        {en:"Curriculum", it:"Curriculum"},
-  ct_cvv:       {en:"Download CV (English) — Italian version also available", it:"Scarica CV (Italiano) — versione inglese disponibile"},
-  footer:       {en:"© 2026 Mahesh Pentu · Caserta, Italy · Built with data and care", it:"© 2026 Mahesh Pentu · Caserta, Italia · Costruito con dati e cura"}
+  ct_cvv:       {en:"Download CV — English · Italiano", it:"Scarica CV — Italiano · English"},
+  footer:       {en:"© 2026 Mahesh Pentu · Caserta, Italy · built with data and care", it:"© 2026 Mahesh Pentu · Caserta, Italia · costruito con dati e cura"}
 };
 
 var currentLang = 'en';
@@ -539,15 +597,14 @@ function applyLang(lang) {
     var k2 = htmlNodes[j].getAttribute('data-i18n-html');
     if (I18N[k2]) htmlNodes[j].innerHTML = I18N[k2][lang];
   }
-  document.getElementById('cv-link').href = lang === 'it' ? 'cv/CV_Mahesh_Pentu_IT.docx' : 'cv/CV_Mahesh_Pentu_EN.docx';
-  document.getElementById('cv-link2').href = lang === 'it' ? 'cv/CV_Mahesh_Pentu_IT.docx' : 'cv/CV_Mahesh_Pentu_EN.docx';
-  document.getElementById('lang-btn').textContent = lang === 'it' ? 'EN' : 'IT';
+  var cv = lang === 'it' ? 'cv/CV_Mahesh_Pentu_IT.docx' : 'cv/CV_Mahesh_Pentu_EN.docx';
+  var a = document.getElementById('cv-link'); if (a) a.href = cv;
+  var b = document.getElementById('cv-link2'); if (b) b.href = cv;
+  var lb = document.getElementById('lang-btn'); if (lb) lb.textContent = lang === 'it' ? 'EN' : 'IT';
   try { localStorage.setItem('portfolio-lang', lang); } catch (e) {}
   try { if (window.ScrollTrigger) ScrollTrigger.refresh(); } catch (e) {}
 }
-function toggleLang() {
-  applyLang(currentLang === 'it' ? 'en' : 'it');
-}
+function toggleLang() { applyLang(currentLang === 'it' ? 'en' : 'it'); }
 (function init() {
   var saved = null;
   try { saved = localStorage.getItem('portfolio-lang'); } catch (e) {}
@@ -563,58 +620,62 @@ window.applyLang = applyLang;
 <script>
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || typeof gsap === 'undefined') return;
+  if (reduce || typeof gsap === 'undefined') {
+    var l = document.getElementById('loader'); if (l) l.style.display = 'none';
+    return;
+  }
   gsap.registerPlugin(ScrollTrigger);
   gsap.defaults({ ease: 'power3.out' });
 
-  /* Hero entrance — staggered, like reading a dashboard top to bottom */
-  var tl = gsap.timeline({ defaults: { duration: 0.9 } });
-  tl.from('.hero-badge', { y: 18, autoAlpha: 0, duration: 0.6 })
-    .from('.hero h1 > span', { y: 44, autoAlpha: 0, stagger: 0.09 }, '-=0.25')
-    .from('.hero .subtitle', { y: 26, autoAlpha: 0 }, '-=0.5')
-    .from('.hero .lead', { y: 26, autoAlpha: 0 }, '-=0.55')
-    .from('.hero-actions .btn', { y: 20, autoAlpha: 0, stagger: 0.1 }, '-=0.55')
-    .from('.hero-meta', { y: 14, autoAlpha: 0 }, '-=0.45')
-    .from('.hero-photo img', { scale: 0.86, autoAlpha: 0, duration: 1.1 }, '-=0.85')
-    .from('.chip', { y: 22, autoAlpha: 0, stagger: 0.16, duration: 0.6 }, '-=0.55');
-
-  /* Sparkline draws itself */
-  var spark = document.querySelector('.hero-spark path');
-  if (spark) {
-    gsap.fromTo(spark, { strokeDashoffset: 1 }, {
-      strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut', delay: 0.7
+  /* Cursor */
+  var dot = document.getElementById('cursor-dot');
+  var ring = document.getElementById('cursor-ring');
+  if (dot && ring && window.matchMedia('(pointer: fine)').matches) {
+    var dx = gsap.quickTo(dot, 'x', { duration: 0.12, ease: 'power2.out' });
+    var dy = gsap.quickTo(dot, 'y', { duration: 0.12, ease: 'power2.out' });
+    var rx = gsap.quickTo(ring, 'x', { duration: 0.45, ease: 'power3.out' });
+    var ry = gsap.quickTo(ring, 'y', { duration: 0.45, ease: 'power3.out' });
+    window.addEventListener('mousemove', function (e) {
+      dx(e.clientX - 3); dy(e.clientY - 3);
+      rx(e.clientX - 17); ry(e.clientY - 17);
     });
   }
 
-  /* Floating stat chips — gentle yoyo */
-  gsap.to('.chip-1', { y: -10, duration: 2.6, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-  gsap.to('.chip-2', { y: 8, duration: 3.2, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 0.4 });
-
-  /* Metrics count up when scrolled into view */
-  gsap.utils.toArray('.metric .num').forEach(function (el) {
-    var target = parseInt((el.textContent.match(/\d+/) || ['0'])[0], 10);
-    var suffix = el.textContent.replace(/^\d+/, '');
-    var obj = { v: 0 };
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 92%',
-      once: true,
-      onEnter: function () {
-        gsap.to(obj, {
-          v: target, duration: 1.5, ease: 'power2.out',
-          onUpdate: function () { el.textContent = Math.round(obj.v) + suffix; }
-        });
-      }
-    });
+  /* Scroll progress */
+  gsap.to('#scroll-progress', {
+    scaleX: 1, ease: 'none',
+    scrollTrigger: { start: 0, end: 'max', scrub: 0.3 }
   });
 
-  /* Section reveals — every block fades up as it enters the viewport */
+  /* Loader: cycle words, then reveal */
+  var tlLoad = gsap.timeline({ onComplete: function () {
+    var l = document.getElementById('loader');
+    if (l) { l.style.display = 'none'; }
+  }});
+  tlLoad
+    .to('#loader .words span', { opacity: 0, duration: 0.001, stagger: 0.001 })
+    .fromTo('#loader .words span:first-child', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 })
+    .to('#loader .words span:first-child', { opacity: 0, y: -14, duration: 0.35 }, '+=0.7')
+    .fromTo('#loader .words span:nth-child(2)', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 })
+    .to('#loader .words span:nth-child(2)', { opacity: 0, y: -14, duration: 0.35 }, '+=0.7')
+    .fromTo('#loader .words span:nth-child(3)', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 })
+    .to('#loader', { autoAlpha: 0, duration: 0.45, delay: 0.5 });
+
+  /* Hero entrance after loader */
+  var tlHero = gsap.timeline({ delay: 2.6 });
+  tlHero
+    .from('.hero-badge', { y: 16, autoAlpha: 0, duration: 0.6 })
+    .from('.hero-name .row i', { yPercent: 110, duration: 1, stagger: 0.12, ease: 'power4.out' }, '-=0.3')
+    .from('.hero-avatar', { scale: 0.7, autoAlpha: 0, duration: 0.9 }, '-=0.6')
+    .from('.hero-tag', { y: 18, autoAlpha: 0, duration: 0.7 }, '-=0.5');
+
+  /* Section reveals */
   gsap.utils.toArray('section').forEach(function (sec) {
-    var targets = sec.querySelectorAll('.section-label, .section-title, .section-intro, .card, .pill, .tag, .contact-row');
+    var targets = sec.querySelectorAll('.sec-label, h2, .sec-intro, .card, .stats .stat, .artifact');
     if (!targets.length) return;
     gsap.from(targets, {
-      y: 36, autoAlpha: 0, duration: 0.8, stagger: 0.05,
-      scrollTrigger: { trigger: sec, start: 'top 78%', once: true }
+      y: 40, autoAlpha: 0, duration: 0.85, stagger: 0.06,
+      scrollTrigger: { trigger: sec, start: 'top 75%', once: true }
     });
   });
 })();
