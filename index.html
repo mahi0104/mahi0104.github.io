@@ -192,6 +192,21 @@
   .card .dates { font-family: var(--mono); font-size: 12.5px; color: var(--steel); margin-bottom: 14px; }
   .card p { color: var(--bone-dim); font-size: 15px; }
   .card p strong { color: var(--bone); }
+  .card .preview {
+    width: 100%; display: block; border-radius: 10px;
+    border: 1px solid var(--line); margin-bottom: 18px;
+  }
+  .card .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; align-items: center; }
+  .card .links a.repo {
+    font-family: var(--mono); font-size: 12.5px; color: var(--bone);
+    text-decoration: none; border: 1px solid var(--line); border-radius: 9999px;
+    padding: 6px 14px; transition: border-color 0.15s, color 0.15s;
+  }
+  .card .links a.repo:hover { border-color: var(--violet); color: var(--bone); }
+  .card .links a.file {
+    font-family: var(--mono); font-size: 12.5px; font-weight: 600; color: var(--ink);
+    background: var(--grad); border-radius: 9999px; padding: 6px 14px; text-decoration: none;
+  }
 
   /* Pills */
   .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
@@ -417,6 +432,22 @@
       <p class="sec-intro" data-i18n="work_intro">Real work, real data — not tutorial copies.</p>
       <div class="grid grid-2">
         <div class="card">
+          <img class="preview" src="img/proj-climate.png" alt="Campania warming trends chart" loading="lazy">
+          <h3 data-i18n="p6_t">Campania Climate Trends (1985–2025)</h3>
+          <div class="dates" data-i18n="p6_d">Personal project · Python · 2026</div>
+          <p data-i18n="p6_p">Analysed 40 years of real NASA POWER climate data for six Campanian towns. Every series warms significantly (+0.33 to +0.40 °C per decade), and inland Campania is warming faster than the coast (+0.90 vs +0.83 °C). Full reproducible pipeline: fetch → clean → regress → plot.</p>
+          <div class="pill-row"><span class="pill" data-i18n="p6_t1">Python</span><span class="pill" data-i18n="p6_t2">Statistics</span><span class="pill" data-i18n="p6_t3">Pandas/NumPy</span><span class="pill" data-i18n="p6_t4">Data viz</span></div>
+          <div class="links"><a class="repo" href="https://github.com/mahi0104/campania-climate-trends" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </div>
+        <div class="card">
+          <img class="preview" src="img/proj-tourism.png" alt="EU tourism dashboard preview" loading="lazy">
+          <h3 data-i18n="p7_t">EU Tourism Dashboard (Excel)</h3>
+          <div class="dates" data-i18n="p7_d">Personal project · Python + openpyxl · 2026</div>
+          <p data-i18n="p7_p">Professional Excel dashboard on 25 years of real World Bank tourism data for five EU countries: live KPI formulas, line and bar charts, honest insights — including the 2020 COVID shock (−60% Italy arrivals). Downloadable workbook, fully reproducible builder.</p>
+          <div class="pill-row"><span class="pill" data-i18n="p7_t1">Excel</span><span class="pill" data-i18n="p7_t2">openpyxl</span><span class="pill" data-i18n="p7_t3">APIs</span><span class="pill" data-i18n="p7_t4">Reporting</span></div>
+          <div class="links"><a class="repo" href="https://github.com/mahi0104/eu-tourism-dashboard" target="_blank" rel="noopener">GitHub ↗</a><a class="file" href="docs/EU_Tourism_Dashboard.xlsx" download data-i18n="p7_dl">Download .xlsx</a></div>
+        </div>
+        <div class="card">
           <h3 data-i18n="p2_t">Autonomous Crypto Trading Research System</h3>
           <div class="dates" data-i18n="p2_d">Personal project · Python · 2026</div>
           <p data-i18n="p2_p">Built a complete backtesting and paper-trading system: pulled 8 years of real market data, stress-tested trend-following strategies across bull and bear markets, and deployed an autonomous paper-trading bot that trades and reports daily. The system is designed to survive crashes, not chase them.</p>
@@ -600,6 +631,21 @@ var I18N = {
   p5_t2:        {en:"GSAP", it:"GSAP"},
   p5_t3:        {en:"GitHub Pages", it:"GitHub Pages"},
   p5_t4:        {en:"i18n", it:"i18n"},
+  p6_t:         {en:"Campania Climate Trends (1985–2025)", it:"Tendenze Climatiche Campania (1985–2025)"},
+  p6_d:         {en:"Personal project · Python · 2026", it:"Progetto personale · Python · 2026"},
+  p6_p:         {en:"Analysed 40 years of real NASA POWER climate data for six Campanian towns. Every series warms significantly (+0.33 to +0.40 °C per decade), and inland Campania is warming faster than the coast (+0.90 vs +0.83 °C). Full reproducible pipeline: fetch → clean → regress → plot.", it:"Analizzati 40 anni di dati climatici reali NASA POWER per sei comuni campani. Tutte le serie si scaldano in modo significativo (+0,33 – +0,40 °C per decennio) e l'entroterra più veloce della costa (+0,90 vs +0,83 °C). Pipeline riproducibile completa: fetch → pulizia → regressione → grafici."},
+  p6_t1:        {en:"Python", it:"Python"},
+  p6_t2:        {en:"Statistics", it:"Statistica"},
+  p6_t3:        {en:"Pandas/NumPy", it:"Pandas/NumPy"},
+  p6_t4:        {en:"Data viz", it:"Data viz"},
+  p7_t:         {en:"EU Tourism Dashboard (Excel)", it:"Dashboard Turismo UE (Excel)"},
+  p7_d:         {en:"Personal project · Python + openpyxl · 2026", it:"Progetto personale · Python + openpyxl · 2026"},
+  p7_p:         {en:"Professional Excel dashboard on 25 years of real World Bank tourism data for five EU countries: live KPI formulas, line and bar charts, honest insights — including the 2020 COVID shock (−60% Italy arrivals). Downloadable workbook, fully reproducible builder.", it:"Dashboard Excel professionale su 25 anni di dati turistici reali della Banca Mondiale per cinque paesi UE: formule KPI live, grafici a linee e barre, insight onesti — incluso lo shock COVID 2020 (−60% arrivi in Italia). Workbook scaricabile, builder completamente riproducibile."},
+  p7_t1:        {en:"Excel", it:"Excel"},
+  p7_t2:        {en:"openpyxl", it:"openpyxl"},
+  p7_t3:        {en:"APIs", it:"API"},
+  p7_t4:        {en:"Reporting", it:"Reporting"},
+  p7_dl:        {en:"Download .xlsx", it:"Scarica .xlsx"},
   path_title:   {en:"Education, experience <em>&amp; more</em>", it:"Formazione, esperienza <em>e altro</em>"},
   edu1_role:    {en:"Education", it:"Formazione"},
   edu1_t:       {en:"BSc Data Analysis — 80/100", it:"Laurea in Data Analysis — 80/100"},
