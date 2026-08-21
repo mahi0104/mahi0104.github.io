@@ -1,7 +1,7 @@
 name: daily-research
 on:
   schedule:
-    - cron: '0 7 * * *'  # 09:00 CET (07:00 UTC) daily
+    - cron: '0 7 * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -10,5 +10,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Placeholder — daily research is pushed via API
-        run: echo "Daily research automation ready — trigger via workflow_dispatch or extend with generation script"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generate daily research (EN, no teasers)
+        run: |
+          python scripts/daily_research.py
+          ls -l research/
+          cat linkedin_post.txt
+      - name: Update research index and sitemap
+        run: |
+          python scripts/update_index.py
+      - name: Commit
+        run: |
+          git config user.name "mahi-bot"
+          git config user.email "mahi0104@users.noreply.github.com"
+          git add research/ research/index.html sitemap.xml linkedin_post.txt scripts/
+          git diff --cached --quiet || git commit -m "daily research $(date -I)"
+          git push
+      - name: Post to LinkedIn (if secret present)
+        env:
+          LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+        run: |
+          if [ -z "$LINKEDIN_TOKEN" ]; then echo "LINKEDIN_TOKEN not set - skipping LinkedIn (site still published)"; exit 0; fi
+          TEXT=$(cat linkedin_post.txt)
+          JSON=$(python -c "import json; print(json.dumps({'author':'urn:li:person:_pMbrO7oHa','commentary': open('linkedin_post.txt',encoding='utf-8').read(), 'visibility':'PUBLIC'}))")
+          curl -s -X POST "https://api.linkedin.com/rest/posts" -H "Authorization: Bearer $LINKEDIN_TOKEN" -H "Content-Type: application/json" -H "X-Restli-Protocol-Version: 2.0.0" -H "LinkedIn-Version: 202401" --data "$JSON" | head -c 800
