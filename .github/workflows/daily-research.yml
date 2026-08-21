@@ -1,0 +1,14 @@
+name: daily-research
+on:
+  schedule:
+    - cron: '0 7 * * *'  # 09:00 CET (07:00 UTC) daily
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Placeholder — daily research is pushed via API
+        run: echo "Daily research automation ready — trigger via workflow_dispatch or extend with generation script"
