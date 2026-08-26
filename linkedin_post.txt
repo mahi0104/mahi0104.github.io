@@ -1,10 +1,10 @@
-Daily Research #06 — Crypto trading bot: pipeline notes
+Daily Research #06 — Web scraping pipeline that does not break
 
-Signal latency <120ms | Sharpe 1.4 backtest
+Retry + validation | 99.1% field completeness
 
 Reproducible pipeline + sample data on the site.
 
 Read the full drop:
-https://mahi0104.github.io/research/2026-08-26-crypto-trading-bot.html
+https://mahi0104.github.io/research/2026-08-26-web-scraping-pipeline.html
 
 #SpatialRegression #DataAnalysis #Campania #Python #Reproducible
