@@ -1,10 +1,10 @@
-Daily Research #06 — Web scraping pipeline that does not break
+Daily Research #07 — Data quality checks that prevent silent failures
 
-Retry + validation | 99.1% field completeness
+6 gates | null, range, referential, drift
 
 Reproducible pipeline + sample data on the site.
 
 Read the full drop:
-https://mahi0104.github.io/research/2026-08-26-web-scraping-pipeline.html
+https://mahi0104.github.io/research/2026-08-27-data-quality-checks.html
 
 #SpatialRegression #DataAnalysis #Campania #Python #Reproducible
