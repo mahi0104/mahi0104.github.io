@@ -1,10 +1,10 @@
-Daily Research #07 — Data quality checks that prevent silent failures
+Daily Research #08 — Spatial weights: queen vs kNN
 
-6 gates | null, range, referential, drift
+AIC delta 4.2 | SEM wins
 
 Reproducible pipeline + sample data on the site.
 
 Read the full drop:
-https://mahi0104.github.io/research/2026-08-27-data-quality-checks.html
+https://mahi0104.github.io/research/2026-08-28-spatial-weights.html
 
 #SpatialRegression #DataAnalysis #Campania #Python #Reproducible
