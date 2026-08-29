@@ -1,10 +1,10 @@
-Daily Research #08 — Spatial weights: queen vs kNN
+Daily Research #09 — GWR: when global coefficients hide local stories
 
-AIC delta 4.2 | SEM wins
+GWR R2 0.81 | coast vs interior
 
 Reproducible pipeline + sample data on the site.
 
 Read the full drop:
-https://mahi0104.github.io/research/2026-08-28-spatial-weights.html
+https://mahi0104.github.io/research/2026-08-29-gwr-local-effects.html
 
 #SpatialRegression #DataAnalysis #Campania #Python #Reproducible
