@@ -1,10 +1,10 @@
-Daily Research #11 — NDVI vs LST: how much does green cool?
+Daily Research #12 — Campania climate trends 1985-2025
 
--0.32C per 0.1 NDVI | R2 0.68 | best in plains
++1.4C since 1985 | -12% summer rain | coast warms faster
 
 Reproducible pipeline + sample data on the site.
 
 Read the full drop:
-https://mahi0104.github.io/research/2026-08-31-ndvi-lst-cooling.html
+https://mahi0104.github.io/research/2026-09-01-campania-climate-trends.html
 
 #SpatialRegression #DataAnalysis #Campania #Python #Reproducible
