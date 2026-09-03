@@ -1,10 +1,10 @@
-Daily Research #13 — EU tourism: seasonality and demand
+Daily Research #14 — Crypto trading bot: pipeline notes
 
-Seasonality index | coastal vs city | recovery 2022-25
+Signal latency <120ms | Sharpe 1.4 backtest
 
 Reproducible pipeline + sample data on the site.
 
 Read the full drop:
-https://mahi0104.github.io/research/2026-09-02-eu-tourism-dashboard.html
+https://mahi0104.github.io/research/2026-09-03-crypto-trading-bot.html
 
 #SpatialRegression #DataAnalysis #Campania #Python #Reproducible
