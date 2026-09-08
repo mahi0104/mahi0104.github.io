@@ -1,10 +1,10 @@
-Daily Research #18 — GWR: when global coefficients hide local stories
+Daily Research #19 — Impervious surface vs LST
 
-GWR R2 0.81 | coast vs interior
++2.1C high impervious | NDVI controls
 
 Reproducible pipeline + sample data on the site.
 
 Read the full drop:
-https://mahi0104.github.io/research/2026-09-07-gwr-local-effects.html
+https://mahi0104.github.io/research/2026-09-08-impervious-lst.html
 
 #SpatialRegression #DataAnalysis #Campania #Python #Reproducible
