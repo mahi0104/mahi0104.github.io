@@ -1,10 +1,10 @@
-Daily Research #19 — Impervious surface vs LST
+Daily Research #20 — Elevation drives summer heat in Campania
 
-+2.1C high impervious | NDVI controls
+-0.41C per 100m | R2 0.75 | Morans I 0.28
 
 Reproducible pipeline + sample data on the site.
 
 Read the full drop:
-https://mahi0104.github.io/research/2026-09-08-impervious-lst.html
+https://mahi0104.github.io/research/2026-09-09-elevation-heat-island.html
 
 #SpatialRegression #DataAnalysis #Campania #Python #Reproducible
