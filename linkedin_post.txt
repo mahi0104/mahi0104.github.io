@@ -1,10 +1,10 @@
-Daily Research #20 — Elevation drives summer heat in Campania
+Daily Research #21 — NDVI vs LST: how much does green cool?
 
--0.41C per 100m | R2 0.75 | Morans I 0.28
+-0.32C per 0.1 NDVI | R2 0.68 | best in plains
 
 Reproducible pipeline + sample data on the site.
 
 Read the full drop:
-https://mahi0104.github.io/research/2026-09-09-elevation-heat-island.html
+https://mahi0104.github.io/research/2026-09-10-ndvi-lst-cooling.html
 
 #SpatialRegression #DataAnalysis #Campania #Python #Reproducible
